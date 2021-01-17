@@ -1,11 +1,13 @@
 :root {
-  --orange: #febd69;
   --dark-blue: #232f3e;
   --light-blue: #37475a;
   --dark-grey: #131a22;
   --light-grey-1: #888;
   --light-grey-2: #e7e7e7;
   --red: #b12704;
+  --green: #007600;
+  --orange-1: #f0c14b;
+  --orange-2: #ed9220;
 }
 
 body {
