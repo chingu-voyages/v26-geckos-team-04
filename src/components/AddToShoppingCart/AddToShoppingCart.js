@@ -33,7 +33,7 @@ const AddToShoppingCartStyles = styled.div`
 
    .stock-status {
        font-size: 18px;
-       color: #007600;
+       color: var(--green);
    }
 
    button {
@@ -63,12 +63,12 @@ const AddToShoppingCartStyles = styled.div`
    }
 
    .cart-button {
-        background-color: #f0c14b;
+        background-color: var(--orange-1);
         border-color: #a88734 #9c7e31 #846a29;
    }
 
    .buy-button {
-        background-color: #ed9220;
+        background-color: var(--orange-2);
         border-color: #ca7c1b #be751a #a56616;
    }
 
