@@ -1,34 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from './CustomizedCheckbox';
-
-const data = [
-    {
-       "id":1,
-       "title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-       "price":109.95,
-       "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-    },
-    {
-       "id":2,
-       "title":"Mens Casual Premium Slim Fit T-Shirts ",
-       "price":22.3,
-       "description":"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
-    },
-    {
-       "id":3,
-       "title":"Mens Cotton Jacket",
-       "price":55.99,
-       "description":"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-    }
-];
-
+import DropdownMenu from './DropdownMenu';
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -53,17 +26,16 @@ const ItemInfo = styled.div`
     margin-right: 2%;
     float: left;
     margin-left: 220px;
-    width: auto;
-    border: solid 2px yellow;
+    width: 100%;
 `;
 const ItemPrice= styled.div`
     float: right;
     font-size: 18px;
     font-weight: 600;
-    line-height: 2.5;
+    line-height: 2;
 `;
 const Details = styled.ul`
-    padding-left: 180px;
+    padding-left: 220px;
     width: 100%;
     list-style: none; //reset
     padding: 0; //reset
@@ -94,7 +66,7 @@ const Title = styled.a`
 `;
 const Image = styled.a`
     width: 180px;
-    margin-left: -220px;
+    margin-left: -210px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,7 +91,7 @@ const Manipulation = styled.div`
     width: auto;
 `;
 
-const Anchor = styled.a`
+const Link = styled.a`
     font-size: 12px;
     color: var(--dark-green);
     text-decoration: none; //reset
@@ -137,49 +109,50 @@ const Divider = styled.div`
 `;
 
 
-function ShoppingCartProduct() {
+function ShoppingCartProduct(props) {
     //Checkbox from material ui
     const [checked, setChecked] = useState(true);
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
   return (
-    <div style={{margin: "100px", border: "solid 1px red"}}>
-        <ProductContainer style={{border: "solid 1px green"}}>
+    <>
+        <ProductContainer>
                 <ItemInfo>
                     <Image href="/">
                         <CustomizedCheckbox onClick={handleChange} style={{transform: "scale(1.2)"}}/>
-                        <img src={data[0].image} alt="item image" />
+                        <img src={props.image} alt="item image" />
                     </Image>
                     <Details>
                         <Detail>
-                            <Anchor href="/" style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>OneOdio Over Ear Headphone, Wired Bass Headsets with 50mm Driver, Foldable Lightweight Headphones with Shareport and Mic for Recording Monitoring Mixing Podcast Guitar PC TV - (Grey)</Anchor>
+                            <Link href="/" style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{props.title}</Link>
                         </Detail>
                         <Detail>In Stock</Detail>
                         <Detail>
                             <CustomizedCheckbox onClick={handleChange}/>
                             This is a gift
-                            <Anchor href="/" style={{marginLeft: "4px"}}>Learn more</Anchor>
+                            <Link href="/" style={{marginLeft: "4px"}}>Learn more</Link>
                         </Detail>
                     </Details>
                     <Manipulations>
+                        <DropdownMenu />
                         <Divider />
                         <Manipulation>
-                            <Anchor>Delete</Anchor>
+                            <Link>Delete</Link>
                         </Manipulation>
                         <Divider />
                         <Manipulation>
-                            <Anchor>Save for later</Anchor>
+                            <Link>Save for later</Link>
                         </Manipulation>
                         <Divider />
                         <Manipulation>
-                            <Anchor>Compare with similar items</Anchor>
+                            <Link>Compare with similar items</Link>
                         </Manipulation>
                     </Manipulations>
                 </ItemInfo>
-                <ItemPrice>${data[0].price}</ItemPrice>
+                <ItemPrice>${props.price}</ItemPrice>
         </ProductContainer>
-    </div>
+    </>
   );
 }
 
