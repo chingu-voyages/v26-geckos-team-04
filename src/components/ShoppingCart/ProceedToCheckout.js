@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import CustomizedCheckbox from './CustomizedCheckbox';
 
 const Container = styled.section`
-    // width: 300px;
-    // height: 150px;
     width: 260px;
     height: auto;
     background: #fff;

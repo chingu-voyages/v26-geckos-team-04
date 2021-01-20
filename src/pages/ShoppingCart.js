@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ShoppingCartList from '../components/ShoppingCartList';
-import ProceedToCheckout from '../components/ProceedToCheckout';
+import ShoppingCartList from '../components/ShoppingCart/ShoppingCartList';
+import ProceedToCheckout from '../components/ShoppingCart/ProceedToCheckout';
 
 const ShoppingCartPage = styled.section`
     width: 100%;
