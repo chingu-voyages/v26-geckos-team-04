@@ -24,7 +24,7 @@ const HomeStyles = styled.div`
     flex-direction: column;
     max-width: 1500px;
     margin: 0 auto;
-    background-color: grey;
+    background-color: var(--light-grey-2);
     
     .carousel {
         margin-bottom: 0;
