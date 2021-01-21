@@ -7,8 +7,12 @@ import StarHalfIcon from '@material-ui/icons/StarHalf';
 const ProductInformationStyles = styled.div`
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 20px;
+
+    @media (min-width: 992px) {
+        grid-template-columns: 1fr 1fr;
+    }
 
     hr {
         display: block;
