@@ -27,7 +27,7 @@ const ProductInformationStyles = styled.div`
     }
 
     .product-rating {
-        color: var(--orange);
+        color: var(--orange-1);
     }
 
     .product-details-list {

@@ -6,17 +6,13 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LockIcon from '@material-ui/icons/Lock';
 
 const AddToShoppingCartStyles = styled.div`
-   width: 100%;
+   min-width: 250px;
+   max-height: 400px;
    padding: 18px;
-   margin: 20px;
    display: flex;
    flex-direction: column;
    border: 1px solid var(--light-grey-2);
    border-radius: 5px;
-
-   @media (min-width: 768px) {
-       width: 250px;
-   }
 
    > * {
        margin: 5px 0;
