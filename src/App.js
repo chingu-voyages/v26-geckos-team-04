@@ -1,11 +1,13 @@
-import ShoppingCart from './pages/ShoppingCart';
+import { ProductsDataProvider } from "./contexts/ProductsDataProvider";
 
-function App() {
-  return (
-    <div className="App">
-      <ShoppingCart />
-    </div>
-  );
+function App(props) {
+    return (
+        <div className="App">
+            <ProductsDataProvider>
+                ...
+            </ProductsDataProvider>
+        </div>
+    );
 }
 
 export default App;
