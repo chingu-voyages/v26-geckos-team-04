@@ -1,3 +1,4 @@
+
 .header {
     height: 60px;
     display: flex;
@@ -64,4 +65,49 @@
 .header__nav {
     display: flex;
     justify-content: space-evenly;
+}
+
+@media screen and (max-width: 767.98px) {
+    .header {
+        height: 120px;
+        display: flex;
+        align-items: center;
+        background-color: #131921;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .header__logo {
+        width: 60px;
+        object-fit: contain;
+        margin: 0 18px 20px;
+    }
+
+    .header__search {
+        height: 60px;
+        position: absolute;
+        width:100%;
+        bottom:0;
+    }
+
+    .header__option {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        color: white;
+    }
+    .header__optionLineOne {
+        font-size: 8px;
+    }
+
+    .header__optionLineTwo {
+        font-size: 12px;
+        font-weight: 800;
+    }
+    .header__nav {
+        position: absolute;
+        right:5px;
+    }
 }
