@@ -8,6 +8,10 @@ const Container = styled.section`
     background: #fff;
     padding: 20px;
     padding-bottom: 30px;
+    @media screen and (max-width: 579px) {
+        box-sizing: border-box;
+        width: 100%;
+    }
 `;
 const Subtotal = styled.div`
     width: 100%;
@@ -20,6 +24,8 @@ const Gift = styled.div`
     text-align: left;
     color: #0f1111;
     font-size: 14px;
+    display: flex;
+    margin: 8px 0;
 `;
 const CheckoutButton = styled.div`
     text-decoration: none;
@@ -30,6 +36,10 @@ const CheckoutButton = styled.div`
     border: solid 1px #aaa;
     &:hover {
         background-image: linear-gradient(to bottom, #f1e2bf 0%, #e8b93a 100%);
+    }
+    @media screen and (max-width: 579px) {
+        width: 100%;
+        max-width: 350px;
     }
 `;
 const Text = styled.div`
@@ -69,8 +79,8 @@ function ProceedToCheckout() {
             <span style={{fontWeight: "600"}}> ${dollar.toFixed(2)}</span>
         </Subtotal>
         <Gift>
-            <CustomizedCheckbox style={{transform: "scale(0.8)"}}/>
-            This order contains a gift
+            <CustomizedCheckbox />
+            <div style={{marginLeft: "5px"}}>This order contains a gift</div>
         </Gift>
         <CheckoutButton>
             <Link href="/">

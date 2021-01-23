@@ -1,5 +1,7 @@
 import ShoppingCartProduct from './ShoppingCartProduct';
+import ShoppingCartProductSp from './ShoppingCartProductSp';
 import styled from 'styled-components';
+import useWindowWidthState from '../../hooks/useWindowWidthState';
 
 const data = [
     {
@@ -32,6 +34,9 @@ const Cart = styled.section`
     padding: 20px;
     padding-bottom: 30px;
     background: #fff;
+    @media screen and (max-width: 579px) {
+        padding: 0;
+    }
 `;
 const Top = styled.div`
     width: 100%;
@@ -77,23 +82,38 @@ const Subtotal = styled.div`
 function ShoppingCartList() {
     const num = data.length;
     const total = data.reduce((sum, d) => d.price + sum, 0);
+    const windowWidth = useWindowWidthState();
     return (
         <Cart>
-            <Top>
-                <Title>Shopping Cart</Title>
-                <Link>Deselect all items</Link>
-                <PriceTag>Price</PriceTag>
-            </Top>
-            {data.map((d, i) => {
-                return (
-                    <ProductContainer key={i}>
-                        <ShoppingCartProduct {...data[i]} />
-                    </ProductContainer>
-                )
-            })}
-            <Subtotal>
-                Subtotal ({num} items): <span style={{fontWeight: "600"}}>${total}</span>
-            </Subtotal>
+            { windowWidth > 579 ? (
+                <Top>
+                    <Title>Shopping Cart</Title>
+                    <Link>Deselect all items</Link>
+                    <PriceTag>Price</PriceTag>
+                </Top>
+            ) : ("")}
+            { windowWidth > 579 ? (
+                data.map((d, i) => {
+                    return (
+                        <ProductContainer key={i}>
+                            <ShoppingCartProduct {...data[i]} />
+                        </ProductContainer>
+                    )
+                })
+            ) : (
+                data.map((d, i) => {
+                    return (
+                        <ProductContainer key={i}>
+                            <ShoppingCartProductSp {...data[i]} />
+                        </ProductContainer>
+                    )
+                })
+            )}
+            { windowWidth > 579 ? (
+                <Subtotal>
+                    Subtotal ({num} items): <span style={{fontWeight: "600"}}>${total}</span>
+                </Subtotal>
+            ) : ("")}
         </Cart>
     );
 }

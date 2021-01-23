@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from './CustomizedCheckbox';
-import DropdownMenu from './DropdownMenu';
+import DropdownQuantity from './DropdownQuantity';
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -27,6 +27,9 @@ const ItemInfo = styled.div`
     float: left;
     margin-left: 220px;
     width: 100%;
+    // @media screen and (max-width: 579px) {
+    //     margin-left: 130px;
+    // }
 `;
 const ItemPrice= styled.div`
     float: right;
@@ -35,7 +38,7 @@ const ItemPrice= styled.div`
     line-height: 2;
 `;
 const Details = styled.ul`
-    padding-left: 220px;
+    // padding-left: 220px;
     width: 100%;
     list-style: none; //reset
     padding: 0; //reset
@@ -53,18 +56,7 @@ const Detail = styled.li`
         color: var(--green);
     }
 `;
-const Title = styled.a`
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--dark-green);
-    font-weight: 600;
-    text-decoration: none; //reset
-    &:hover {
-        color: var(--red);
-        text-decoration: underline;
-    }
-`;
-const Image = styled.a`
+const Image = styled.div`
     width: 180px;
     margin-left: -210px;
     display: flex;
@@ -76,9 +68,18 @@ const Image = styled.a`
         width: 180px;
         height: 180px;
     }
+    // @media screen and (max-width: 579px) {
+    //     width: 100px;
+    //     margin-left: -130px;
+    //     & img {
+    //         width: 100px;
+    //         height: 100px;
+    //     }
+    // }
     &:hover {
         cursor: pointer;
     }
+    
 `;
 const Manipulations = styled.div`
     width: 100%;
@@ -111,31 +112,31 @@ const Divider = styled.div`
 
 function ShoppingCartProduct(props) {
     //Checkbox from material ui
-    const [checked, setChecked] = useState(true);
-    const handleChange = (event) => {
-      setChecked(event.target.checked);
-    };
   return (
     <>
         <ProductContainer>
                 <ItemInfo>
-                    <Image href="/">
-                        <CustomizedCheckbox onClick={handleChange} style={{transform: "scale(1.2)"}}/>
-                        <img src={props.image} alt="item image" />
+                    <Image>
+                        <div style={{marginRight: "5px"}}>
+                            <CustomizedCheckbox />
+                        </div>
+                        <a href="/">
+                            <img src={props.image} alt="item image" />
+                        </a>
                     </Image>
                     <Details>
                         <Detail>
                             <Link href="/" style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{props.title}</Link>
                         </Detail>
                         <Detail>In Stock</Detail>
-                        <Detail>
-                            <CustomizedCheckbox onClick={handleChange}/>
-                            This is a gift
+                        <Detail style={{display: "flex", margin: "8px 0"}}>
+                            <CustomizedCheckbox />
+                            <div style={{marginLeft: "5px"}}>This is a gift</div>
                             <Link href="/" style={{marginLeft: "4px"}}>Learn more</Link>
                         </Detail>
                     </Details>
                     <Manipulations>
-                        <DropdownMenu />
+                        <DropdownQuantity />
                         <Divider />
                         <Manipulation>
                             <Link>Delete</Link>
