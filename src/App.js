@@ -1,8 +1,9 @@
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
     <div className="App">
-      hi
+      <ShoppingCart />
     </div>
   );
 }
