@@ -13,8 +13,13 @@
     "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+<<<<<<< HEAD
     "save": "^2.4.0",
     "styled-components": "^5.2.1",
+||||||| 5844f13
+=======
+    "styled-components": "^5.2.1",
+>>>>>>> develop
     "web-vitals": "^0.2.4"
   },
   "scripts": {
