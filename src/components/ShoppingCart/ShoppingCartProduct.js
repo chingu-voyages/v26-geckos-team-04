@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CustomizedCheckbox from './CustomizedCheckbox';
-import DropdownQuantity from './DropdownQuantity';
+import CustomizedCheckbox from '../common/CustomizedCheckbox';
+import DropdownQuantity from '../common/DropdownQuantity';
 
 const ProductContainer = styled.div`
     width: 100%;
