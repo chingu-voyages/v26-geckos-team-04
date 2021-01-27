@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ProductQuantity from './ProductQuantity';
+import ProductQuantity from '../common/ProductQuantity';
 
 const ProductContainer = styled.div`
     width: 100%;

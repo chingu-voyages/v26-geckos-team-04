@@ -1,6 +1,7 @@
 // import React from 'react';
 import styled from 'styled-components';
-import CustomizedCheckbox from './CustomizedCheckbox';
+import CustomizedCheckbox from '../common/CustomizedCheckbox';
+import YellowButton from '../common/YellowButton';
 
 const Container = styled.section`
     width: 260px;
@@ -82,11 +83,7 @@ function ProceedToCheckout() {
             <CustomizedCheckbox />
             <div style={{marginLeft: "5px"}}>This order contains a gift</div>
         </Gift>
-        <CheckoutButton>
-            <Link href="/">
-                <Text>Proceed to checkout</Text>
-            </Link>
-        </CheckoutButton>
+        <YellowButton text={"Proceed to checkout"} link={"/"} />
     </Container>
   );
 }

@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from './components/Header/Header';
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ShoppingCart from "./pages/ShoppingCart";
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 // import Login from "./pages/Orders";
 // import Login from "./pages/Payment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { auth } from "./firebase";
+import { useStateValue } from "./contexts/StateProvider";
 
 function App() {
+  const [{}, dispatch] = useStateValue();
+
+  useEffect(()=> {
+
+      auth.onAuthStateChanged(authUser => {
+        console.log('The USER is >>>', authUser);
+
+      if(authUser) {
+
+        dispatch({
+          type:'SET_USER',
+          user: authUser
+        })
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null
+        });
+      }   
+    });
+  },[]);
+
   return (
     <Router>
       <div className="App">
@@ -19,7 +43,7 @@ function App() {
             <h1>Orders</h1>
           </Route>
           <Route path="/login">
-            {/* <Login /> */}
+            <Login />
             <h1>Log in</h1>
           </Route>
           <Route path="/checkout">
