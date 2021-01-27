@@ -12,17 +12,22 @@ const BackToTopStyle = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    &:hover {
+        background: #47576a;
+    }
 `;
 const Text = styled.div`
     font-size: 12px;
     color: #fff;
 `;
+
 export default function CustomizedCheckbox() {
     const windowWidth = useWindowWidthState();
+    const isSp = windowWidth > 579;
   return (
       <>
         <BackToTopStyle onClick={backToTop}>
-      { windowWidth > 579 ? (
+      { isSp ? (
             <Text>Back to top</Text>
       ) : (
         <>
