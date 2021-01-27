@@ -1,9 +1,9 @@
-import ShoppingCart from './pages/ShoppingCart';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <ShoppingCart />
+      <Footer />
     </div>
   );
 }
