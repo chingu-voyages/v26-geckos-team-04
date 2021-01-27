@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ProductPreview from "../components/ProductPreview/ProductPreview";
+import useWindowWidthState from '../hooks/useWindowWidthState';
 
 // Carousel images
 import carousel1 from "../assets/carousel-1.jpg";
@@ -53,15 +54,7 @@ const HomeStyles = styled.div`
 
 export default function Home() {
 
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(function() {
-      if (window.innerWidth <= 567) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    }, []);
+    const windowWidth = useWindowWidthState();
 
     return (
         <HomeStyles>
@@ -74,13 +67,13 @@ export default function Home() {
                 interval={6000}
                 infiniteLoop={true}
             >
-                {isMobile? mobileCarouselImages.map(image => (
-                    <div>
-                        <img src={image} alt="mobile carousel banner" />
-                    </div>
-                )) : desktopCarouselImages.map(image => (
+                {windowWidth > 579 ? desktopCarouselImages.map(image => (
                     <div>
                         <img src={image} alt="carousel banner" />
+                    </div>
+                )) : mobileCarouselImages.map(image => (
+                    <div>
+                        <img src={image} alt="mobile carousel banner" />
                     </div>
                 ))}
             </Carousel>
@@ -94,7 +87,6 @@ export default function Home() {
                 <ProductPreview />
                 <ProductPreview />
             </div>
-            
         </HomeStyles>
     )
 }
