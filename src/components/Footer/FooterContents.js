@@ -1,169 +1,62 @@
-export const FooterContents = [
-    {
-        title: "Get to Know Us",
-        contents: [
-            {
-                content: "About us",
-                url: "/",
-            },
-            {
-                content: "Careers",
-                url: "/",
-            },
-            {
-                content: "Corporate Information",
-                url: "/",
-            },
-            {
-                content: "Press Releases",
-                url: "/",
-            },
-        ]
-    },
-    {
-        title: "Make Money with Us",
-        contents: [
-            {
-                content: "Independently Publish with Us",
-                url: "/",
-            },
-            {
-                content: "Sell on Amazon",
-                url: "/",
-            },
-            {
-                content: "Drive with Amazon Flex",
-                url: "/",
-            },
-            {
-                content: "Advertise Your Products",
-                url: "/",
-            },
-            {
-                content: "Associates Programme",
-                url: "/",
-            },
-            {
-                content: "Host an Amazon Hub",
-                url: "/",
-            },
-        ]
-    },
-    {
-        title: "Let Us Help You",
-        contents: [
-            {
-                content: "COVID-19 and Amazon",
-                url: "/",
-            },
-            {
-                content: "Your Account",
-                url: "/",
-            },
-            {
-                content: "Your Orders",
-                url: "/",
-            },
-            {
-                content: "Delivery Rates & Policies",
-                url: "/",
-            },
-            {
-                content: "Returns & Replacement",
-                url: "/",
-            },
-            {
-                content: "Manage Your Content and Devices",
-                url: "/",
-            },
-            {
-                content: "Help",
-                url: "/",
-            },
-        ]
-    },
-];
-export const Countries = [
-    {
-        name: "Brazil",
-        url: "/"
-    },
-    {
-        name: "Canada",
-        url: "/"
-    },
-    {
-        name: "China",
-        url: "/"
-    },
-    {
-        name: "France",
-        url: "/"
-    },
-    {
-        name: "Germany",
-        url: "/"
-    },
-    {
-        name: "India",
-        url: "/"
-    },
-    {
-        name: "Italy",
-        url: "/"
-    },
-    {
-        name: "Japan",
-        url: "/"
-    },
-    {
-        name: "Mexico",
-        url: "/"
-    },
-    {
-        name: "Netherlands",
-        url: "/"
-    },
-    {
-        name: "Singapore",
-        url: "/"
-    },
-    {
-        name: "Spain",
-        url: "/"
-    },
-    {
-        name: "Turkey",
-        url: "/"
-    },
-    {
-        name: "United Arab Emirates",
-        url: "/"
-    },
-    {
-        name: "United Kingdom",
-        url: "/"
-    },
-    {
-        name: "United States",
-        url: "/"
-    },
-];
-export const AmazonServices = [
-    {
-        name: "Amazon Advertising",
-        url: "/"
-    },
-    {
-        name: "Amazon Web Services",
-        url: "/"
-    },
-    {
-        name: "Goodreads",
-        url: "/"
-    },
-    {
-        name: "Shopbop",
-        url: "/"
-    },
-]
+import React from "react";
+import styled from "styled-components";
+import { footerlinks } from './footerlinks';
+const ContentsTable = styled.div`
+    display: table;
+    margin: auto;
+    padding: 30px 0;
+`;
+const ContentsRow = styled.div`
+    display: table-row;
+`;
+const ContentsCell = styled.ul`
+    display: table-cell;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 30px;
+`;
+const SpacerCell = styled.li`
+    display: table-cell;
+    padding: 0 10px;
+    width: 10%;
+`;
+const ContentTitle = styled.li`
+    font-size: 16px;
+    font-weight: 600;
+    margin: 6px 0 14px;
+`;
+const ContentLine = styled.li`
+    font-size: 14px;
+    margin-bottom: 10px;
+    a {
+        text-decoration: none;
+        color: #ddd;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+`;
+
+export default function FooterContents() {
+    
+    return (
+        <ContentsTable>
+            <ContentsRow>
+                {footerlinks.map((footerContents, i) => (
+                    <React.Fragment key={i}>
+                        <ContentsCell>
+                            <ContentTitle>{footerContents.title}</ContentTitle>
+                            {footerContents.contents.map((footercontent, j) => (
+                                <ContentLine key={j}>
+                                    <a href={footercontent.url}>{footercontent.content}</a>
+                                </ContentLine>
+                            ))}
+                        </ContentsCell>
+                        {i === footerlinks.length - 1 ? "" : <SpacerCell />}
+                    </React.Fragment>
+                ))}
+            </ContentsRow>
+        </ContentsTable>
+    )
+}
