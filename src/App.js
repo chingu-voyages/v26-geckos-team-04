@@ -12,7 +12,7 @@ import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [_, dispatch] = useStateValue();
 
   useEffect(()=> {
 
