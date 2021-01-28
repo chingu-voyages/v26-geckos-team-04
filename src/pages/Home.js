@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ProductPreview from "../components/ProductPreview/ProductPreview";
 import useWindowWidthState from '../hooks/useWindowWidthState';
+import { ProductContext } from '../contexts/StateProvider';
+import { Link } from "react-router-dom";
 
 // Carousel images
 import carousel1 from "../assets/carousel-1.jpg";
@@ -36,11 +38,20 @@ const HomeStyles = styled.div`
         display: grid;
         width: 100%;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        grid-template-rows: 420px;
+        grid-auto-rows: 420px;
         grid-gap: 20px;
         padding: 20px;
         justify-items: center;
         box-sizing: border-box;
+
+        > * {
+            box-sizing: border-box;
+            background-color: white;
+            padding: 10px 20px;
+            width: 100%;
+            z-index: 2;
+            text-decoration: none;
+        }
     }
 
     @media (min-width: 567px) {
@@ -55,6 +66,7 @@ const HomeStyles = styled.div`
 export default function Home() {
 
     const windowWidth = useWindowWidthState();
+    const products = useContext(ProductContext);
 
     return (
         <HomeStyles>
@@ -78,14 +90,9 @@ export default function Home() {
                 ))}
             </Carousel>
             <div className="product-grid">
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
-                <ProductPreview />
+                {products && products.map(product => (
+                    <Link to={`/product/${product.id}`}><ProductPreview key={product.id} image={product.image} title={product.title} /></Link>
+                ))}
             </div>
         </HomeStyles>
     )
