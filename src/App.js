@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-pattern */
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect } from "react";
 // import Header from './components/Header/Header';
@@ -51,10 +53,7 @@ function App() {
             {/* <Header />  */}
             <ShoppingCart />
           </Route>
-          <Route path="/product">
-            {/* <Header />  */}
-            <Product />
-          </Route>
+          <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
             {/* <Header />  */}
             {/* <Payment /> */}
