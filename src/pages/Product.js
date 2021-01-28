@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ProductInformation from '../components/ProductInformation/ProductInformation';
 import AddToShoppingCart from '../components/AddToShoppingCart/AddToShoppingCart';
+import { ProductContext } from '../contexts/StateProvider';
 
 const ProductPageStyles = styled.div`
     display: grid;
@@ -14,11 +15,22 @@ const ProductPageStyles = styled.div`
     }
 `
 
-export default function Product() {
+export default function Product({ match }) {
+
+    const {
+        params: { productId }
+    } = match;
+
+    const products = useContext(ProductContext);
+
     return (
-        <ProductPageStyles>
-            <ProductInformation />
-            <AddToShoppingCart />
-        </ProductPageStyles>
+        <>
+        {products && 
+            <ProductPageStyles>
+                <ProductInformation product={products.find(product => product.id === parseInt(productId))} />
+                <AddToShoppingCart product={products.find(product => product.id === parseInt(productId))} />
+            </ProductPageStyles>
+        }
+        </>
     )
 }
