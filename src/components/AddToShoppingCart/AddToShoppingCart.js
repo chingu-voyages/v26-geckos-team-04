@@ -4,6 +4,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShopIcon from '@material-ui/icons/Shop';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LockIcon from '@material-ui/icons/Lock';
+import CurrencyFormat from 'react-currency-format';
 
 const AddToShoppingCartStyles = styled.div`
    min-width: 250px;
@@ -84,11 +85,13 @@ const AddToShoppingCartStyles = styled.div`
    }
 `;
 
-export default function AddToShoppingCart() {
+export default function AddToShoppingCart({ product }) {
     return (
         <AddToShoppingCartStyles>
             <div className="price">
-                <div className="price-primary">$50.68</div>
+                <div className="price-primary">
+                    <CurrencyFormat value={product?.price} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
+                </div>
                 <div className="price-secondary">+ $23.58 Delivery</div>
             </div>
             <div><span className="details-key">Arrives: </span><span className="details-value">4 - 8 Feb</span></div>
