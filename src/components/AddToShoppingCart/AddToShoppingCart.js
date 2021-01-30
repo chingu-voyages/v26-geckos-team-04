@@ -87,6 +87,7 @@ const AddToShoppingCartStyles = styled.div`
 `;
 
 export default function AddToShoppingCart({ product }) {
+    // eslint-disable-next-line no-unused-vars
     const [_, dispatch] = useStateValue();
 
     function addProductToCart() {
