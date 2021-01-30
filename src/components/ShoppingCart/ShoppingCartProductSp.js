@@ -24,9 +24,9 @@ const ItemInfo = styled.div`
 `;
 const Details = styled.ul`
     width: 100%;
-    list-style: none; //reset
-    padding: 0; //reset
-    margin: 0; //reset
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -79,7 +79,7 @@ const Manipulation = styled.div`
 
 const Link = styled.a`
     font-size: 12px;
-    text-decoration: none; //reset
+    text-decoration: none; 
 `;
 
 
