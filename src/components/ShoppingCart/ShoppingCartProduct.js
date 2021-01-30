@@ -27,9 +27,6 @@ const ItemInfo = styled.div`
     float: left;
     margin-left: 220px;
     width: 100%;
-    // @media screen and (max-width: 579px) {
-    //     margin-left: 130px;
-    // }
 `;
 const ItemPrice= styled.div`
     float: right;
@@ -68,14 +65,6 @@ const Image = styled.div`
         width: 180px;
         height: 180px;
     }
-    // @media screen and (max-width: 579px) {
-    //     width: 100px;
-    //     margin-left: -130px;
-    //     & img {
-    //         width: 100px;
-    //         height: 100px;
-    //     }
-    // }
     &:hover {
         cursor: pointer;
     }
