@@ -50,10 +50,7 @@ function App() {
             {/* <Header />  */}
             <ShoppingCart />
           </Route>
-          <Route path="/product">
-            {/* <Header />  */}
-            <Product />
-          </Route>
+          <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
             {/* <Header />  */}
             {/* <Payment /> */}

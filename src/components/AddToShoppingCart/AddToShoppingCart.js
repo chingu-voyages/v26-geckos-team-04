@@ -4,6 +4,8 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShopIcon from '@material-ui/icons/Shop';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LockIcon from '@material-ui/icons/Lock';
+import CurrencyFormat from 'react-currency-format';
+import { useStateValue } from "../../contexts/StateProvider";
 
 const AddToShoppingCartStyles = styled.div`
    min-width: 250px;
@@ -84,17 +86,31 @@ const AddToShoppingCartStyles = styled.div`
    }
 `;
 
-export default function AddToShoppingCart() {
+export default function AddToShoppingCart({ product }) {
+    // eslint-disable-next-line no-unused-vars
+    const [_, dispatch] = useStateValue();
+
+    function addProductToCart() {
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: product
+        })
+    }
+
     return (
         <AddToShoppingCartStyles>
             <div className="price">
-                <div className="price-primary">$50.68</div>
+                <div className="price-primary">
+                    <CurrencyFormat value={product?.price} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
+                </div>
                 <div className="price-secondary">+ $23.58 Delivery</div>
             </div>
             <div><span className="details-key">Arrives: </span><span className="details-value">4 - 8 Feb</span></div>
             <div><span className="details-key">Fastest delivery: </span><span className="details-value">27 - 29 Jan</span></div>
             <div className="stock-status">In stock.</div>
-            <button className="cart-button"><AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span></button>
+            <button className="cart-button" onClick={addProductToCart}>
+                <AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span>
+            </button>
             <button className="buy-button"><ShopIcon className="icon"/><span className="text">Buy Now</span></button>
             <div className="secure-details"><LockIcon fontSize="small" className="icon"/><span>Secure transaction</span></div>
             <div>
