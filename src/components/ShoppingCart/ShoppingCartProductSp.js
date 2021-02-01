@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductQuantity from '../common/ProductQuantity';
-import { useStateValue } from '../../contexts/StateProvider';
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -84,25 +83,7 @@ const Link = styled.div`
 `;
 
 
-function ShoppingCartProduct({product}) {
-    //Checkbox from material ui
-    const [{ basket, user }, dispatch] = useStateValue();
-    //Add firebase with useEffect later...
-    const removeFromBasket = () => {
-        dispatch({
-            type: 'REMOVE_FROM_BASKET',
-            id: product.id,
-        })
-        console.log('remove',basket)
-    }
-    const setQuantity = (n) => {
-        dispatch({
-            type: 'SET_QUANTITY',
-            id: product.id,
-            quantity: n
-        })
-        console.log('quantity',basket)
-    }
+function ShoppingCartProduct({product, remove, setQuantity}) {
     const [checked, setChecked] = useState(true);
     const handleChange = (event) => {
       setChecked(event.target.checked);
@@ -123,10 +104,15 @@ function ShoppingCartProduct({product}) {
                 </Details>
             </ItemInfo>
             <Manipulations>
-                <ProductQuantity setQuantity={setQuantity} remove={removeFromBasket}/>
+                <ProductQuantity 
+                    setQuantity={setQuantity} 
+                    remove={remove}
+                    quantity={product.quantity ? product.quantity : 1}
+                    id={product.id}
+                />
                 <div style={{display: "flex", marginLeft: "20px"}}>
                     <Manipulation>
-                        <Link onClick={removeFromBasket}>Delete</Link>
+                        <Link onClick={remove}>Delete</Link>
                     </Manipulation>
                     <Manipulation>
                         <Link>Save for later</Link>

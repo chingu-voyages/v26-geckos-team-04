@@ -75,8 +75,8 @@ const Aside = styled.div`
 
 function Orders() {
     const [{ basket, user }, dispatch] = useStateValue();
-    //temporary function
     function add() {
+        //temporary function to add products to shopping cart easily 
         initialProducts.forEach((p) => {
             dispatch({
                 type: 'ADD_TO_BASKET',
@@ -84,7 +84,6 @@ function Orders() {
             })
         })
     }
-    // const subtotal = products.reduce((sum, d) => d.price + sum, 0);
     const subtotal = basket.reduce((sum, d) => {
         if (d.quantity && typeof(d.quantity) == "number") {
             return d.price * d.quantity + sum

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import DropdownQuantity from '../common/DropdownQuantity';
-import { useStateValue } from '../../contexts/StateProvider';
 import { Link } from "react-router-dom";
 
 const ProductContainer = styled.div`
@@ -101,23 +100,7 @@ const Divider = styled.div`
 `;
 
 
-function ShoppingCartProduct({product}) {
-
-    const [{ basket, user }, dispatch] = useStateValue();
-    //Add firebase with useEffect later...
-    const removeFromBasket = () => {
-        dispatch({
-            type: 'REMOVE_FROM_BASKET',
-            id: product.id,
-        })
-    }
-    const setQuantity = (n) => {
-        dispatch({
-            type: 'SET_QUANTITY',
-            id: product.id,
-            quantity: n
-        })
-    }
+function ShoppingCartProduct({product, remove, setQuantity}) {
   return (
     <>
         <ProductContainer>
@@ -142,10 +125,15 @@ function ShoppingCartProduct({product}) {
                         </Detail>
                     </Details>
                     <Manipulations>
-                        <DropdownQuantity remove={removeFromBasket} setQuantity={setQuantity} id={product.id}/>
+                        <DropdownQuantity 
+                            id={product.id}
+                            remove={remove} 
+                            setQuantity={setQuantity} 
+                            quantity={product.quantity ? product.quantity : 1}
+                        />
                         <Divider />
                         <Manipulation>
-                            <LinkStyle onClick={removeFromBasket}>Delete</LinkStyle>
+                            <LinkStyle onClick={remove}>Delete</LinkStyle>
                         </Manipulation>
                         <Divider />
                         <Manipulation>

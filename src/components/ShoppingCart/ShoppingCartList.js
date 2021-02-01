@@ -2,7 +2,7 @@ import ShoppingCartProduct from './ShoppingCartProduct';
 import ShoppingCartProductSp from './ShoppingCartProductSp';
 import styled from 'styled-components';
 import useWindowWidthState from '../../hooks/useWindowWidthState';
-
+import { useStateValue } from '../../contexts/StateProvider';
   
 const Cart = styled.section`
     padding: 20px;
@@ -56,6 +56,22 @@ const Subtotal = styled.div`
 function ShoppingCartList({products, subtotal}) {
     const num = products.length;
     const windowWidth = useWindowWidthState();
+    const [{ basket, user }, dispatch] = useStateValue();
+    //Add firebase with useEffect later...
+    const removeFromBasket = (id) => {
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: id,
+        })
+    }
+    const setQuantity = (id, n) => {
+        dispatch({
+            type: 'SET_QUANTITY',
+            id: id,
+            quantity: n
+        })
+        console.log('quantity',basket)
+    }
     return (
         <Cart>
             { windowWidth > 579 ? (
@@ -69,7 +85,11 @@ function ShoppingCartList({products, subtotal}) {
                 products.map((d, i) => {
                     return (
                         <ProductContainer key={i}>
-                            <ShoppingCartProduct product={products[i]} />
+                            <ShoppingCartProduct 
+                                product={products[i]}
+                                remove={() => removeFromBasket(products[i].id)}
+                                setQuantity={setQuantity}
+                            />
                         </ProductContainer>
                     )
                 })
@@ -77,7 +97,11 @@ function ShoppingCartList({products, subtotal}) {
                 products.map((d, i) => {
                     return (
                         <ProductContainer key={i}>
-                            <ShoppingCartProductSp product={products[i]} />
+                            <ShoppingCartProductSp 
+                                product={products[i]}
+                                remove={() => removeFromBasket(products[i].id)}
+                                setQuantity={setQuantity} 
+                            />
                         </ProductContainer>
                     )
                 })

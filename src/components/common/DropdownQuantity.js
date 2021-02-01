@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useToggleState from '../../hooks/useToggleState';
-import { useStateValue } from '../../contexts/StateProvider';
 
 const Button = styled.div`
     position: relative;
@@ -76,42 +75,31 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu({remove, setQuantity}) {
-    const [num, setNum] = useState("1");
+function DropdownMenu({remove, setQuantity, quantity, id}) {
     const [opened, toggleOpened] = useToggleState(false);
-    const option = ["0 (Delete)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
-    // const setQuantity = (n) => {
-    //     dispatch({
-    //         type: 'SET_QUANTITY',
-    //         id: 
-    //         quantity: n
-    //     })
-    // }
+    const option = ["0 (Delete)", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10+"];
     const toggleSetNum = (n) => {
         toggleOpened();
         if (n === '0 (Delete)') {
             remove();
         } else if (n === '10+') {
             console.log('10+ action here')
-            setNum(n);
-            setQuantity(10);
+            setQuantity(id, 10);
         } else {
-            setNum(n);
-            setQuantity(parseInt(num));
-            console.log('num:', num)
+            setQuantity(id, parseInt(n));
         }
     }
   return (
     <Button>
         <ButtonTop onClick={toggleOpened}>
-            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {num}</Text>
+            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {quantity}</Text>
             <ExpandMoreIcon style={{transform: "scale(0.9)", paddingRight: "5px"}}/>
         </ButtonTop>
         {opened ? (
             <Dropdown>
                 <Menu>
                     {option.map((n,i) => {
-                        if (n === num) {
+                        if (n === parseInt(quantity)) {
                             return (
                                 <SelectedItem key={i} onClick={() => toggleSetNum(n)}>{n}</SelectedItem>
                             )
