@@ -1,6 +1,3 @@
-/* eslint-disable no-empty-pattern */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import React, { useEffect } from "react";
 // import Header from './components/Header/Header';
 import Home from "./pages/Home";
@@ -14,7 +11,7 @@ import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [_, dispatch] = useStateValue();
 
   useEffect(()=> {
 
