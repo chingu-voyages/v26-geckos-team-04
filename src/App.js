@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // import Header from './components/Header/Header';
 import Home from "./pages/Home";
 import Product from "./pages/Product";
-import ShoppingCart from "./pages/ShoppingCart";
+import Orders from "./pages/Orders";
 import Login from "./pages/Login";
 // import Login from "./pages/Orders";
 // import Login from "./pages/Payment";
@@ -39,8 +39,7 @@ function App() {
         <Switch>
           <Route path="/orders">
             {/* <Header />  */}
-            {/* <Orders /> */}
-            <h1>Orders</h1>
+            <Orders />
           </Route>
           <Route path="/login">
             <Login />
@@ -48,7 +47,7 @@ function App() {
           </Route>
           <Route path="/checkout">
             {/* <Header />  */}
-            <ShoppingCart />
+            {/* <ShoppingCart /> */}
           </Route>
           <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
