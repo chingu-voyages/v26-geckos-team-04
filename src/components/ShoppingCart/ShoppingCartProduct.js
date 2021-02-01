@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import DropdownQuantity from '../common/DropdownQuantity';
@@ -27,6 +27,7 @@ const ItemInfo = styled.div`
     float: left;
     margin-left: 220px;
     width: 100%;
+
     @media screen and (max-width: 579px) {
          margin-left: 130px;
     }
@@ -68,6 +69,7 @@ const Image = styled.div`
         width: 180px;
         height: 180px;
     }
+
    @media screen and (max-width: 579px) {
          width: 100px;
          margin-left: -130px;
@@ -76,6 +78,7 @@ const Image = styled.div`
              height: 100px;
          }
      }
+
     &:hover {
         cursor: pointer;
     }

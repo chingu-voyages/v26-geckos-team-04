@@ -11,7 +11,7 @@ import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [_, dispatch] = useStateValue();
 
   useEffect(()=> {
 
@@ -50,10 +50,7 @@ function App() {
             <Header /> 
             <ShoppingCart />
           </Route>
-          <Route path="/product">
-            <Header /> 
-            <Product />
-          </Route>
+          <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
             <Header /> 
             {/* <Payment /> */}

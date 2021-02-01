@@ -12,6 +12,7 @@ const BackToTopStyle = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    cursor: pointer;
     &:hover {
         background: #47576a;
     }
