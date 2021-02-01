@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import Header from './components/Header/Header';
+import Header from './components/Header/Header';
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ShoppingCart from "./pages/ShoppingCart";
@@ -38,7 +38,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/orders">
-            {/* <Header />  */}
+            <Header /> 
             {/* <Orders /> */}
             <h1>Orders</h1>
           </Route>
@@ -47,17 +47,17 @@ function App() {
             <h1>Log in</h1>
           </Route>
           <Route path="/checkout">
-            {/* <Header />  */}
+            <Header /> 
             <ShoppingCart />
           </Route>
           <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
-            {/* <Header />  */}
+            <Header /> 
             {/* <Payment /> */}
             <h1>Payment</h1>
           </Route>
           <Route path="/">
-            {/* <Header />  */}
+            <Header /> 
             <Home />
           </Route>
         </Switch>
