@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ShoppingCart from "./pages/ShoppingCart";
 import Login from "./pages/Login";
+import Footer from './components/Footer/Footer';
 // import Login from "./pages/Orders";
 // import Login from "./pages/Payment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -11,6 +12,7 @@ import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const [_, dispatch] = useStateValue();
 
   useEffect(()=> {
@@ -31,20 +33,21 @@ function App() {
         });
       }   
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/login">
+            <Login />
+            <h1>Log in</h1>
+          </Route>
           <Route path="/orders">
             <Header /> 
             {/* <Orders /> */}
             <h1>Orders</h1>
-          </Route>
-          <Route path="/login">
-            <Login />
-            <h1>Log in</h1>
           </Route>
           <Route path="/checkout">
             <Header /> 
@@ -61,6 +64,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
