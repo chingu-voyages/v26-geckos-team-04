@@ -29,7 +29,7 @@ const Gift = styled.div`
     margin: 8px 0;
 `;
 
-function ProceedToCheckout() {
+function ProceedToCheckout({subtotal}) {
     const num = 5;
     const itemsText = (num) => {
         if (num > 1) {
@@ -38,12 +38,11 @@ function ProceedToCheckout() {
             return "item"
         }
     }
-    const dollar = 223.1;
   return (
     <Container>
         <Subtotal>
             Subtotal ({num} {itemsText(num)}): 
-            <span style={{fontWeight: "600"}}> ${dollar.toFixed(2)}</span>
+            <span style={{fontWeight: "600"}}> ${subtotal.toFixed(2)}</span>
         </Subtotal>
         <Gift>
             <CustomizedCheckbox />

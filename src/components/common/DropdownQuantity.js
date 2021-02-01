@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useToggleState from '../../hooks/useToggleState';
+import { useStateValue } from '../../contexts/StateProvider';
 
 const Button = styled.div`
     position: relative;
@@ -75,13 +76,30 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu() {
+function DropdownMenu({remove, setQuantity}) {
     const [num, setNum] = useState("1");
     const [opened, toggleOpened] = useToggleState(false);
     const option = ["0 (Delete)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
+    // const setQuantity = (n) => {
+    //     dispatch({
+    //         type: 'SET_QUANTITY',
+    //         id: 
+    //         quantity: n
+    //     })
+    // }
     const toggleSetNum = (n) => {
         toggleOpened();
-        setNum(n);
+        if (n === '0 (Delete)') {
+            remove();
+        } else if (n === '10+') {
+            console.log('10+ action here')
+            setNum(n);
+            setQuantity(10);
+        } else {
+            setNum(n);
+            setQuantity(parseInt(num));
+            console.log('num:', num)
+        }
     }
   return (
     <Button>

@@ -38,15 +38,17 @@ const ProductsNum = styled.div`
     align-items: center;
 `;
 
-function ProductQuantity() {
+function ProductQuantity({setQuantity, remove}) {
     const [count, setCount] = useState(1);
     const countAction = (clicked) => {
         if (clicked === "INCREASE") {
+            setQuantity(count)
             setCount(count + 1);
         } else if (clicked === "REDUCE") {
+            setQuantity(count)
             setCount(count - 1);
         } else if (clicked === "DELETE") {
-            console.log("DELETE ACTION");
+            remove()
         }
     }
   return (
@@ -63,7 +65,7 @@ function ProductQuantity() {
         >
             <InnerIcon>
                 { count === 1 ? (
-                    <DeleteOutlineIcon />
+                    <DeleteOutlineIcon onClick={() => countAction('DELETE')}/>
                 ) : (
                     <RemoveIcon />
                 )}

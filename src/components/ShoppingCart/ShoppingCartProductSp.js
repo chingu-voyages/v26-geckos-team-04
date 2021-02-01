@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductQuantity from '../common/ProductQuantity';
+import { useStateValue } from '../../contexts/StateProvider';
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -77,14 +78,31 @@ const Manipulation = styled.div`
     background-image: linear-gradient(to bottom, #fcfcfd 0%, #e7e9ec 100%);
 `;
 
-const Link = styled.a`
+const Link = styled.div`
     font-size: 12px;
-    text-decoration: none; //reset
+    // text-decoration: none; //reset
 `;
 
 
-function ShoppingCartProduct(props) {
+function ShoppingCartProduct({product}) {
     //Checkbox from material ui
+    const [{ basket, user }, dispatch] = useStateValue();
+    //Add firebase with useEffect later...
+    const removeFromBasket = () => {
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: product.id,
+        })
+        console.log('remove',basket)
+    }
+    const setQuantity = (n) => {
+        dispatch({
+            type: 'SET_QUANTITY',
+            id: product.id,
+            quantity: n
+        })
+        console.log('quantity',basket)
+    }
     const [checked, setChecked] = useState(true);
     const handleChange = (event) => {
       setChecked(event.target.checked);
@@ -93,22 +111,22 @@ function ShoppingCartProduct(props) {
     <>
         <ProductContainer>
             <ItemInfo>
-                <Image href="/">
-                    <img src={props.image} alt="item image" />
+                <Image>
+                    <img src={product.image} alt="item image" />
                 </Image>
                 <Details>
                     <Detail>
-                        <Link href="/" style={{color: "#000", fontSize: "15px"}}>{props.title}</Link>
+                        <Link style={{color: "#000", fontSize: "15px"}}>{product.title}</Link>
                     </Detail>
-                    <Detail>${props.price}</Detail>
+                    <Detail>${product.price}</Detail>
                     <Detail>In Stock</Detail>
                 </Details>
             </ItemInfo>
             <Manipulations>
-                <ProductQuantity />
+                <ProductQuantity setQuantity={setQuantity} remove={removeFromBasket}/>
                 <div style={{display: "flex", marginLeft: "20px"}}>
                     <Manipulation>
-                        <Link>Delete</Link>
+                        <Link onClick={removeFromBasket}>Delete</Link>
                     </Manipulation>
                     <Manipulation>
                         <Link>Save for later</Link>

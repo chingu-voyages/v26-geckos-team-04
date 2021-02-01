@@ -35,7 +35,13 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.user
             }
-
+        case "SET_QUANTITY":
+            return {
+                ...state,
+                basket: state.basket.map(product => 
+                            product.id === action.id ? { ...product, quantity: action.quantity } : product
+                        )
+            }
         default:
             return state;
     }

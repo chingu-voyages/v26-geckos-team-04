@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import DropdownQuantity from '../common/DropdownQuantity';
+import { useStateValue } from '../../contexts/StateProvider';
+import { Link } from "react-router-dom";
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -81,7 +83,7 @@ const Manipulation = styled.div`
     width: auto;
 `;
 
-const Link = styled.a`
+const LinkStyle = styled.div`
     font-size: 12px;
     color: var(--dark-green);
     text-decoration: none; //reset
@@ -99,8 +101,23 @@ const Divider = styled.div`
 `;
 
 
-function ShoppingCartProduct(props) {
-    //Checkbox from material ui
+function ShoppingCartProduct({product}) {
+
+    const [{ basket, user }, dispatch] = useStateValue();
+    //Add firebase with useEffect later...
+    const removeFromBasket = () => {
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: product.id,
+        })
+    }
+    const setQuantity = (n) => {
+        dispatch({
+            type: 'SET_QUANTITY',
+            id: product.id,
+            quantity: n
+        })
+    }
   return (
     <>
         <ProductContainer>
@@ -109,38 +126,38 @@ function ShoppingCartProduct(props) {
                         <div style={{marginRight: "5px"}}>
                             <CustomizedCheckbox />
                         </div>
-                        <a href="/">
-                            <img src={props.image} alt="item image" />
-                        </a>
+                        <Link to="/" >
+                            <img src={product.image} alt="item image" />
+                        </Link>
                     </Image>
                     <Details>
                         <Detail>
-                            <Link href="/" style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{props.title}</Link>
+                            <LinkStyle  style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{product.title}</LinkStyle>
                         </Detail>
                         <Detail>In Stock</Detail>
                         <Detail style={{display: "flex", margin: "8px 0"}}>
                             <CustomizedCheckbox />
                             <div style={{marginLeft: "5px"}}>This is a gift</div>
-                            <Link href="/" style={{marginLeft: "4px"}}>Learn more</Link>
+                            <LinkStyle  style={{marginLeft: "4px"}}>Learn more</LinkStyle>
                         </Detail>
                     </Details>
                     <Manipulations>
-                        <DropdownQuantity />
+                        <DropdownQuantity remove={removeFromBasket} setQuantity={setQuantity} id={product.id}/>
                         <Divider />
                         <Manipulation>
-                            <Link>Delete</Link>
+                            <LinkStyle onClick={removeFromBasket}>Delete</LinkStyle>
                         </Manipulation>
                         <Divider />
                         <Manipulation>
-                            <Link>Save for later</Link>
+                            <LinkStyle>Save for later</LinkStyle>
                         </Manipulation>
                         <Divider />
                         <Manipulation>
-                            <Link>Compare with similar items</Link>
+                            <LinkStyle>Compare with similar items</LinkStyle>
                         </Manipulation>
                     </Manipulations>
                 </ItemInfo>
-                <ItemPrice>${props.price}</ItemPrice>
+                <ItemPrice>${product.price}</ItemPrice>
         </ProductContainer>
     </>
   );
