@@ -1,10 +1,18 @@
 export const initialState = {
     basket: [],
-    user: null
+    user: null,
 };
 
 // Selector
-export const getBasketTotal = (basket) => basket?.reduce((amount, item) => item.price + amount, 0);
+// export const getBasketTotal = (basket) => {
+//     if (basket) {
+//         return basket.reduce((amount, item) => {
+//             const basketItemQuantity = item.quantity ? item.quantity : 1
+//             return item.price * basketItemQuantity + amount
+//         }, 0);  
+//     }
+//     return 0;
+// }
 
 const reducer = (state, action) => {
 

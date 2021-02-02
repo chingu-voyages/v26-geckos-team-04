@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import YellowButton from '../common/YellowButton';
+import useBasketTotal from '../../hooks/useBasketTotal';
 
 const Container = styled.section`
     width: 260px;
@@ -29,7 +30,7 @@ const Gift = styled.div`
     margin: 8px 0;
 `;
 
-function ProceedToCheckout({subtotal}) {
+function ProceedToCheckout() {
     const num = 5;
     const itemsText = (num) => {
         if (num > 1) {
@@ -38,11 +39,12 @@ function ProceedToCheckout({subtotal}) {
             return "item"
         }
     }
+    const subtotal = useBasketTotal();
   return (
     <Container>
         <Subtotal>
             Subtotal ({num} {itemsText(num)}): 
-            <span style={{fontWeight: "600"}}> ${subtotal.toFixed(2)}</span>
+            <span style={{fontWeight: "600"}}> ${subtotal?.toFixed(2)}</span>
         </Subtotal>
         <Gift>
             <CustomizedCheckbox />

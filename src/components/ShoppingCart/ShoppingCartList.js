@@ -3,6 +3,7 @@ import ShoppingCartProductSp from './ShoppingCartProductSp';
 import styled from 'styled-components';
 import useWindowWidthState from '../../hooks/useWindowWidthState';
 import { useStateValue } from '../../contexts/StateProvider';
+import useBasketTotal from '../../hooks/useBasketTotal';
   
 const Cart = styled.section`
     padding: 20px;
@@ -53,10 +54,11 @@ const Subtotal = styled.div`
     font-size: 18px;
 `;
 
-function ShoppingCartList({products, subtotal}) {
+function ShoppingCartList({products}) {
     const num = products.length;
     const windowWidth = useWindowWidthState();
     const [{ basket, user }, dispatch] = useStateValue();
+    const subtotal = useBasketTotal();
     //Add firebase with useEffect later...
     const removeFromBasket = (id) => {
         dispatch({

@@ -130,6 +130,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
                             remove={remove} 
                             setQuantity={setQuantity} 
                             quantity={product.quantity ? product.quantity : 1}
+                            zeroOption={true}
                         />
                         <Divider />
                         <Manipulation>

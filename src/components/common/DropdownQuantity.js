@@ -75,16 +75,14 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu({remove, setQuantity, quantity, id}) {
+function DropdownMenu({remove, setQuantity, quantity, id, zeroOption}) {
     const [opened, toggleOpened] = useToggleState(false);
-    const option = ["0 (Delete)", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10+"];
+    const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    if (zeroOption) option.unshift("0 (Delete)");
     const toggleSetNum = (n) => {
         toggleOpened();
         if (n === '0 (Delete)') {
             remove();
-        } else if (n === '10+') {
-            console.log('10+ action here')
-            setQuantity(id, 10);
         } else {
             setQuantity(id, parseInt(n));
         }
