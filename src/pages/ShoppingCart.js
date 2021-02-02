@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import ShoppingCartList from '../components/ShoppingCart/ShoppingCartList';
 import ProceedToCheckout from '../components/ShoppingCart/ProceedToCheckout';
 import { useStateValue } from '../contexts/StateProvider';
@@ -45,6 +46,23 @@ const Aside = styled.aside`
         width: 100%;
     }
 `;
+const Empty = styled.div`
+    width: auto;
+    background: #fff;
+    padding: 30px;
+    h2 { 
+        font-size: 32px;
+        font-weight: 300;
+    }
+    p {
+        padding: 0;
+        font-size: 14px;
+    }
+`;
+const Spacer = styled.div`
+    height: 300px;
+    width: 100%;
+`;
 
 function ShoppingCart() {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -52,7 +70,17 @@ function ShoppingCart() {
         <ShoppingCartPage>
             <Container>
                 <Main>
-                    <ShoppingCartList products={basket} />
+                    {basket.length === 0 ? (
+                        <>
+                        <Empty>
+                            <h2>Your Amazon Cart is empty.</h2>
+                            <p>Check your Saved for later items below or <Link to='/' style={{textDecoration: 'none', color: '#007600'}}>continue shopping</Link>.</p>
+                        </Empty>
+                        <Spacer />
+                        </>
+                    ) : (
+                        <ShoppingCartList products={basket} />
+                    )}
                 </Main>
                 <Aside>
                     <ProceedToCheckout />
