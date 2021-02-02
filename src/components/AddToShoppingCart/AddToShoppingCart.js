@@ -110,7 +110,7 @@ export default function AddToShoppingCart({ product }) {
             <div><span className="details-key">Arrives: </span><span className="details-value">4 - 8 Feb</span></div>
             <div><span className="details-key">Fastest delivery: </span><span className="details-value">27 - 29 Jan</span></div>
             <div className="stock-status">In stock.</div>
-            <DropdownQuantity />
+            <DropdownQuantity product={product} zeroOption={false}/>
             <button className="cart-button" onClick={addProductToCart}>
                 <AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span>
             </button>

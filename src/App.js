@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import Header from './components/Header/Header';
 import Home from "./pages/Home";
 import Product from "./pages/Product";
-import Orders from "./pages/Orders";
+// import Orders from "./pages/Orders";
+import ShoppingCart from'./pages/ShoppingCart';
 import Login from "./pages/Login";
 import Footer from './components/Footer/Footer';
 // import Login from "./pages/Orders";
@@ -40,10 +41,6 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/orders">
-            <Header />
-            <Orders />
-          </Route>
           <Route path="/login">
             <Login />
             <h1>Log in</h1>
@@ -51,7 +48,6 @@ function App() {
           <Route path="/orders">
             <Header /> 
             {/* <Orders /> */}
-            <h1>Orders</h1>
           </Route>
           <Route path="/checkout">
             <Header /> 

@@ -114,7 +114,7 @@ const Divider = styled.div`
 `;
 
 
-function ShoppingCartProduct({product, remove, setQuantity}) {
+function ShoppingCartProduct({product, remove}) {
   return (
     <>
         <ProductContainer>
@@ -140,10 +140,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
                     </Details>
                     <Manipulations>
                         <DropdownQuantity 
-                            id={product.id}
-                            remove={remove} 
-                            setQuantity={setQuantity} 
-                            quantity={product.quantity ? product.quantity : 1}
+                            product={product}
                             zeroOption={true}
                         />
                         <Divider />
