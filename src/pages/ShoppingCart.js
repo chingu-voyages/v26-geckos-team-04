@@ -74,7 +74,7 @@ function ShoppingCart() {
                         <>
                         <Empty>
                             <h2>Your Amazon Cart is empty.</h2>
-                            <p>Check your Saved for later items below or <Link to='/' style={{textDecoration: 'none', color: '#007600'}}>continue shopping</Link>.</p>
+                            <p>Check your Saved for later items below or <Link to='/' style={{textDecoration: 'none', color: '#007185'}}>continue shopping</Link>.</p>
                         </Empty>
                         <Spacer />
                         </>
