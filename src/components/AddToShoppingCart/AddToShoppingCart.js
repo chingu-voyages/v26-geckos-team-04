@@ -6,6 +6,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LockIcon from '@material-ui/icons/Lock';
 import CurrencyFormat from 'react-currency-format';
 import { useStateValue } from "../../contexts/StateProvider";
+import DropdownQuantity from '../common/DropdownQuantity';
 
 const AddToShoppingCartStyles = styled.div`
    min-width: 250px;
@@ -109,6 +110,7 @@ export default function AddToShoppingCart({ product }) {
             <div><span className="details-key">Arrives: </span><span className="details-value">4 - 8 Feb</span></div>
             <div><span className="details-key">Fastest delivery: </span><span className="details-value">27 - 29 Jan</span></div>
             <div className="stock-status">In stock.</div>
+            <DropdownQuantity />
             <button className="cart-button" onClick={addProductToCart}>
                 <AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span>
             </button>
