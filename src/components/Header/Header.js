@@ -1,8 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useStateValue } from '../../contexts/StateProvider';
 import { Search } from "@material-ui/icons";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import styled from "styled-components";
-import { Link } from 'react-router-dom'
+import amazonLogo from '../../assets/amazon-logo-white-768x232.png';
+import { auth } from '../../firebase';
 
 const HeaderStyles = styled.div`
   min-height: 100px;
@@ -99,13 +102,22 @@ const HeaderStyles = styled.div`
 
 
 function Header() {
+
+  const [{ basket, user }] = useStateValue();
+
+  function handleAuthentication() {
+    if (user) {
+      auth.signOut();
+    }
+  }
+  
   return (
     <HeaderStyles>
       <Link to="/">
         <img
           className="logo"
-          src="https://mikekitko.com/wp-content/uploads/2019/10/amazon-logo-white-768x232.png"
-          alt="Amazon's logo"
+          src={amazonLogo}
+          alt="Amazon logo"
         />
       </Link>
       <div className="search">
@@ -113,10 +125,12 @@ function Header() {
         <Search className="searchIcon" />
       </div>
       <div className="nav">
-        <Link to="/login">
-          <div className="option">
-            <span className="optionLineOne">Hello Guest</span>
-            <span className="optionLineTwo">Sign in</span>
+        <Link to={!user && "/login"}>
+          <div onClick={handleAuthentication} className="option">
+            <span className="optionLineOne">Hello {user? user.email : 'Guest'}</span>
+            <span className="optionLineTwo">
+              {user? 'Sign Out' : 'Sign In'}
+            </span>
           </div>
         </Link>
         <Link to="/orders">
@@ -132,7 +146,7 @@ function Header() {
         <Link to="/checkout">
           <div className="optionBasket">
             <ShoppingCartIcon />
-            <span className="optionLineTwo basketCount">0</span>
+            <span className="optionLineTwo basketCount">{basket?.length}</span>
           </div>
         </Link>
       </div>
