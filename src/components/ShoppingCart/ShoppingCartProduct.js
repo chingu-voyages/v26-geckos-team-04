@@ -28,6 +28,10 @@ const ItemInfo = styled.div`
     float: left;
     margin-left: 220px;
     width: 100%;
+
+    @media screen and (max-width: 579px) {
+         margin-left: 130px;
+    }
 `;
 const ItemPrice= styled.div`
     float: right;
@@ -36,11 +40,11 @@ const ItemPrice= styled.div`
     line-height: 2;
 `;
 const Details = styled.ul`
-    // padding-left: 220px;
+     padding-left: 220px;
     width: 100%;
-    list-style: none; //reset
-    padding: 0; //reset
-    margin: 0; //reset
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -66,6 +70,16 @@ const Image = styled.div`
         width: 180px;
         height: 180px;
     }
+
+   @media screen and (max-width: 579px) {
+         width: 100px;
+         margin-left: -130px;
+         & img {
+             width: 100px;
+             height: 100px;
+         }
+     }
+
     &:hover {
         cursor: pointer;
     }
@@ -85,7 +99,7 @@ const Manipulation = styled.div`
 const LinkStyle = styled.div`
     font-size: 12px;
     color: var(--dark-green);
-    text-decoration: none; //reset
+    text-decoration: none; 
     &:hover {
         color: var(--red);
         text-decoration: underline;
@@ -110,7 +124,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
                             <CustomizedCheckbox />
                         </div>
                         <Link to="/" >
-                            <img src={product.image} alt="item image" />
+                            <img src={product.image} alt={product.title} />
                         </Link>
                     </Image>
                     <Details>

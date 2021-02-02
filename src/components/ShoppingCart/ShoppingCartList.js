@@ -31,7 +31,7 @@ const Title = styled.div`
 const Link = styled.a`
     font-size: 14px;
     color: var(--dark-green);
-    text-decoration: none; //reset
+    text-decoration: none; 
     &:hover {
         color: var(--red);
         text-decoration: underline;

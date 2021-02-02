@@ -6,15 +6,17 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LockIcon from '@material-ui/icons/Lock';
 import CurrencyFormat from 'react-currency-format';
 import { useStateValue } from "../../contexts/StateProvider";
+import DropdownQuantity from '../common/DropdownQuantity';
 
 const AddToShoppingCartStyles = styled.div`
    min-width: 250px;
-   max-height: 400px;
+   height: 430px;
    padding: 18px;
    display: flex;
    flex-direction: column;
    border: 1px solid var(--light-grey-2);
    border-radius: 5px;
+   background-color: white;
 
    > * {
        margin: 5px 0;
@@ -103,11 +105,12 @@ export default function AddToShoppingCart({ product }) {
                 <div className="price-primary">
                     <CurrencyFormat value={product?.price} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
                 </div>
-                <div className="price-secondary">+ $23.58 Delivery</div>
+                <div className="price-secondary">+ <CurrencyFormat value={product?.price * 0.25} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} /> Delivery</div>
             </div>
             <div><span className="details-key">Arrives: </span><span className="details-value">4 - 8 Feb</span></div>
             <div><span className="details-key">Fastest delivery: </span><span className="details-value">27 - 29 Jan</span></div>
             <div className="stock-status">In stock.</div>
+            <DropdownQuantity />
             <button className="cart-button" onClick={addProductToCart}>
                 <AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span>
             </button>

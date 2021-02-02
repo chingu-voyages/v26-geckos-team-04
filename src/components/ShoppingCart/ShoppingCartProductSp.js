@@ -24,9 +24,9 @@ const ItemInfo = styled.div`
 `;
 const Details = styled.ul`
     width: 100%;
-    list-style: none; //reset
-    padding: 0; //reset
-    margin: 0; //reset
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -79,12 +79,13 @@ const Manipulation = styled.div`
 
 const Link = styled.div`
     font-size: 12px;
-    // text-decoration: none; //reset
 `;
 
-
 function ShoppingCartProduct({product, remove, setQuantity}) {
+    //Checkbox from material ui
+    // eslint-disable-next-line no-unused-vars
     const [checked, setChecked] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
@@ -93,7 +94,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
         <ProductContainer>
             <ItemInfo>
                 <Image>
-                    <img src={product.image} alt="item image" />
+                    <img src={product.image} alt={props.title}/>
                 </Image>
                 <Details>
                     <Detail>
