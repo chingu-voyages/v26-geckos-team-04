@@ -38,22 +38,21 @@ const ProductsNum = styled.div`
     align-items: center;
 `;
 
-function ProductQuantity() {
-    const [count, setCount] = useState(1);
+function ProductQuantity({setQuantity, remove, quantity, id}) {
     const countAction = (clicked) => {
         if (clicked === "INCREASE") {
-            setCount(count + 1);
+            setQuantity(id, quantity + 1);
         } else if (clicked === "REDUCE") {
-            setCount(count - 1);
+            setQuantity(id, quantity - 1)
         } else if (clicked === "DELETE") {
-            console.log("DELETE ACTION");
+            remove()
         }
     }
   return (
     <Button>
         <SideButton 
             onClick={() => {
-                if (count === 1) {
+                if (quantity === 1) {
                     countAction("DELETE");
                 } else {
                     countAction("REDUCE");
@@ -62,14 +61,14 @@ function ProductQuantity() {
             style={{borderRight: "solid 1px #aaa"}}
         >
             <InnerIcon>
-                { count === 1 ? (
-                    <DeleteOutlineIcon />
+                { quantity === 1 ? (
+                    <DeleteOutlineIcon onClick={() => countAction('DELETE')}/>
                 ) : (
                     <RemoveIcon />
                 )}
             </InnerIcon>
         </SideButton>
-        <ProductsNum>{count}</ProductsNum>
+        <ProductsNum>{quantity}</ProductsNum>
         <SideButton onClick={() => countAction("INCREASE")}  style={{borderLeft: "solid 1px #aaa"}}>
             <InnerIcon><AddIcon /></InnerIcon>
         </SideButton>

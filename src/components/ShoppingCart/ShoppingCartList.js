@@ -2,33 +2,8 @@ import ShoppingCartProduct from './ShoppingCartProduct';
 import ShoppingCartProductSp from './ShoppingCartProductSp';
 import styled from 'styled-components';
 import useWindowWidthState from '../../hooks/useWindowWidthState';
-
-const data = [
-    {
-       "id":1,
-       "title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-       "price":109.95,
-       "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-    },
-    {
-       "id":2,
-       "title":"Mens Casual Premium Slim Fit T-Shirts ",
-       "price":22.3,
-       "description":"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
-    },
-    {
-       "id":3,
-       "title":"Mens Cotton Jacket",
-       "price":55.99,
-       "description":"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-       "category":"men clothing",
-       "image":"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-    }
-];
+import { useStateValue } from '../../contexts/StateProvider';
+import useBasketTotal from '../../hooks/useBasketTotal';
   
 const Cart = styled.section`
     padding: 20px;
@@ -79,10 +54,26 @@ const Subtotal = styled.div`
     font-size: 18px;
 `;
 
-function ShoppingCartList() {
-    const num = data.length;
-    const total = data.reduce((sum, d) => d.price + sum, 0);
+function ShoppingCartList({products}) {
+    const num = products.length;
     const windowWidth = useWindowWidthState();
+    const [{ basket, user }, dispatch] = useStateValue();
+    const subtotal = useBasketTotal();
+    //Add firebase with useEffect later...
+    const removeFromBasket = (id) => {
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: id,
+        })
+    }
+    const setQuantity = (id, n) => {
+        dispatch({
+            type: 'SET_QUANTITY',
+            id: id,
+            quantity: n
+        })
+        console.log('quantity',basket)
+    }
     return (
         <Cart>
             { windowWidth > 579 ? (
@@ -93,25 +84,33 @@ function ShoppingCartList() {
                 </Top>
             ) : ("")}
             { windowWidth > 579 ? (
-                data.map((d, i) => {
+                products.map((d, i) => {
                     return (
                         <ProductContainer key={i}>
-                            <ShoppingCartProduct {...data[i]} />
+                            <ShoppingCartProduct 
+                                product={products[i]}
+                                remove={() => removeFromBasket(products[i].id)}
+                                setQuantity={setQuantity}
+                            />
                         </ProductContainer>
                     )
                 })
             ) : (
-                data.map((d, i) => {
+                products.map((d, i) => {
                     return (
                         <ProductContainer key={i}>
-                            <ShoppingCartProductSp {...data[i]} />
+                            <ShoppingCartProductSp 
+                                product={products[i]}
+                                remove={() => removeFromBasket(products[i].id)}
+                                setQuantity={setQuantity} 
+                            />
                         </ProductContainer>
                     )
                 })
             )}
             { windowWidth > 579 ? (
                 <Subtotal>
-                    Subtotal ({num} items): <span style={{fontWeight: "600"}}>${total}</span>
+                    Subtotal ({num} items): <span style={{fontWeight: "600"}}>${subtotal}</span>
                 </Subtotal>
             ) : ("")}
         </Cart>

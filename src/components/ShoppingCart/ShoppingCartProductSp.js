@@ -77,13 +77,11 @@ const Manipulation = styled.div`
     background-image: linear-gradient(to bottom, #fcfcfd 0%, #e7e9ec 100%);
 `;
 
-const Link = styled.a`
+const Link = styled.div`
     font-size: 12px;
-    text-decoration: none; 
 `;
 
-
-function ShoppingCartProduct(props) {
+function ShoppingCartProduct({product, remove, setQuantity}) {
     //Checkbox from material ui
     // eslint-disable-next-line no-unused-vars
     const [checked, setChecked] = useState(true);
@@ -95,22 +93,27 @@ function ShoppingCartProduct(props) {
     <>
         <ProductContainer>
             <ItemInfo>
-                <Image href="/">
-                    <img src={props.image} alt={props.title} />
+                <Image>
+                    <img src={product.image} alt={props.title}/>
                 </Image>
                 <Details>
                     <Detail>
-                        <Link href="/" style={{color: "#000", fontSize: "15px"}}>{props.title}</Link>
+                        <Link style={{color: "#000", fontSize: "15px"}}>{product.title}</Link>
                     </Detail>
-                    <Detail>${props.price}</Detail>
+                    <Detail>${product.price}</Detail>
                     <Detail>In Stock</Detail>
                 </Details>
             </ItemInfo>
             <Manipulations>
-                <ProductQuantity />
+                <ProductQuantity 
+                    setQuantity={setQuantity} 
+                    remove={remove}
+                    quantity={product.quantity ? product.quantity : 1}
+                    id={product.id}
+                />
                 <div style={{display: "flex", marginLeft: "20px"}}>
                     <Manipulation>
-                        <Link>Delete</Link>
+                        <Link onClick={remove}>Delete</Link>
                     </Manipulation>
                     <Manipulation>
                         <Link>Save for later</Link>

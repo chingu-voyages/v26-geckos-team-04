@@ -75,25 +75,29 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu() {
-    const [num, setNum] = useState("1");
+function DropdownMenu({remove, setQuantity, quantity, id, zeroOption}) {
     const [opened, toggleOpened] = useToggleState(false);
-    const option = ["0 (Delete)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"];
+    const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    if (zeroOption) option.unshift("0 (Delete)");
     const toggleSetNum = (n) => {
         toggleOpened();
-        setNum(n);
+        if (n === '0 (Delete)') {
+            remove();
+        } else {
+            setQuantity(id, parseInt(n));
+        }
     }
   return (
     <Button>
         <ButtonTop onClick={toggleOpened}>
-            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {num}</Text>
+            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {quantity}</Text>
             <ExpandMoreIcon style={{transform: "scale(0.9)", paddingRight: "5px"}}/>
         </ButtonTop>
         {opened ? (
             <Dropdown>
                 <Menu>
                     {option.map((n,i) => {
-                        if (n === num) {
+                        if (n === parseInt(quantity)) {
                             return (
                                 <SelectedItem key={i} onClick={() => toggleSetNum(n)}>{n}</SelectedItem>
                             )
