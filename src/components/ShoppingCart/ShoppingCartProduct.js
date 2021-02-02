@@ -124,7 +124,7 @@ function ShoppingCartProduct(props) {
                             <CustomizedCheckbox />
                         </div>
                         <a href="/">
-                            <img src={props.image} alt="item image" />
+                            <img src={props.image} alt={props.title} />
                         </a>
                     </Image>
                     <Details>

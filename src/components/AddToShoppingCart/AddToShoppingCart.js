@@ -15,6 +15,7 @@ const AddToShoppingCartStyles = styled.div`
    flex-direction: column;
    border: 1px solid var(--light-grey-2);
    border-radius: 5px;
+   background-color: white;
 
    > * {
        margin: 5px 0;

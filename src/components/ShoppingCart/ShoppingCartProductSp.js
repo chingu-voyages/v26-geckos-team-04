@@ -85,7 +85,9 @@ const Link = styled.a`
 
 function ShoppingCartProduct(props) {
     //Checkbox from material ui
+    // eslint-disable-next-line no-unused-vars
     const [checked, setChecked] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
@@ -94,7 +96,7 @@ function ShoppingCartProduct(props) {
         <ProductContainer>
             <ItemInfo>
                 <Image href="/">
-                    <img src={props.image} alt="item image" />
+                    <img src={props.image} alt={props.title} />
                 </Image>
                 <Details>
                     <Detail>
