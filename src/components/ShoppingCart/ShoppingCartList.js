@@ -72,7 +72,6 @@ function ShoppingCartList({products}) {
             id: id,
             quantity: n
         })
-        console.log('quantity',basket)
     }
     return (
         <Cart>
@@ -90,7 +89,6 @@ function ShoppingCartList({products}) {
                             <ShoppingCartProduct 
                                 product={products[i]}
                                 remove={() => removeFromBasket(products[i].id)}
-                                setQuantity={setQuantity}
                             />
                         </ProductContainer>
                     )

@@ -94,7 +94,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
         <ProductContainer>
             <ItemInfo>
                 <Image>
-                    <img src={product.image} alt={props.title}/>
+                    <img src={product.image} alt={product.title}/>
                 </Image>
                 <Details>
                     <Detail>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useToggleState from '../../hooks/useToggleState';
+import { useStateValue } from "../../contexts/StateProvider";
 
 const Button = styled.div`
     position: relative;
@@ -75,22 +76,44 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu({remove, setQuantity, quantity, id, zeroOption}) {
+function DropdownMenu({product, zeroOption}) {
+    const [presetQuantity, setPresetQuantity] = useState(1);
     const [opened, toggleOpened] = useToggleState(false);
     const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     if (zeroOption) option.unshift("0 (Delete)");
+    const [_, dispatch] = useStateValue();
+    const remove = (id) => {
+        dispatch({
+            type: 'REMOVE_FROM_BASKET',
+            id: id,
+        })
+    }
+    const setQuantity = (id, n) => {
+        dispatch({
+            type: 'SET_QUANTITY',
+            id: id,
+            quantity: n
+        })
+    }
     const toggleSetNum = (n) => {
         toggleOpened();
+        if (!zeroOption) {
+            setPresetQuantity(n)
+            product.quantity = n
+            return
+        }
         if (n === '0 (Delete)') {
             remove();
         } else {
-            setQuantity(id, parseInt(n));
+            setQuantity(product.id, parseInt(n));
         }
     }
+
+    const quantity = product.quantity ? product.quantity : 1;
   return (
     <Button>
         <ButtonTop onClick={toggleOpened}>
-            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {quantity}</Text>
+            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {!zeroOption ? presetQuantity : quantity}</Text>
             <ExpandMoreIcon style={{transform: "scale(0.9)", paddingRight: "5px"}}/>
         </ButtonTop>
         {opened ? (
