@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useToggleState from '../../hooks/useToggleState';
-import { useStateValue } from "../../contexts/StateProvider";
+import useQuantity from '../../hooks/useQuantity';
 
 const Button = styled.div`
     position: relative;
@@ -76,44 +76,21 @@ const SelectedItem = styled.li`
 `;
 
 
-function DropdownMenu({product, zeroOption}) {
-    const [presetQuantity, setPresetQuantity] = useState(1);
-    const [opened, toggleOpened] = useToggleState(false);
-    const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    if (zeroOption) option.unshift("0 (Delete)");
-    const [_, dispatch] = useStateValue();
-    const remove = (id) => {
-        dispatch({
-            type: 'REMOVE_FROM_BASKET',
-            id: id,
-        })
-    }
-    const setQuantity = (id, n) => {
-        dispatch({
-            type: 'SET_QUANTITY',
-            id: id,
-            quantity: n
-        })
-    }
-    const toggleSetNum = (n) => {
-        toggleOpened();
-        if (!zeroOption) {
-            setPresetQuantity(n)
-            product.quantity = n
-            return
-        }
-        if (n === '0 (Delete)') {
-            remove();
-        } else {
-            setQuantity(product.id, parseInt(n));
-        }
-    }
 
-    const quantity = product.quantity ? product.quantity : 1;
+function DropdownMenu({product, zeroOption}) {
+    const [opened, toggleOpened] = useToggleState(false);
+    const [quantity, setQuantity] = useQuantity(product.id);
+    const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    if (zeroOption) option.unshift(0);
+    const chooseNum = (n) => {
+        toggleOpened();
+        setQuantity(n);
+        product.quantity = n;
+    }
   return (
     <Button>
         <ButtonTop onClick={toggleOpened}>
-            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {!zeroOption ? presetQuantity : quantity}</Text>
+            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {quantity}</Text>
             <ExpandMoreIcon style={{transform: "scale(0.9)", paddingRight: "5px"}}/>
         </ButtonTop>
         {opened ? (
@@ -122,11 +99,15 @@ function DropdownMenu({product, zeroOption}) {
                     {option.map((n,i) => {
                         if (n === parseInt(quantity)) {
                             return (
-                                <SelectedItem key={i} onClick={() => toggleSetNum(n)}>{n}</SelectedItem>
+                                <SelectedItem key={i} onClick={() => chooseNum(n)}>{n}</SelectedItem>
+                            )
+                        } else if (n === 0) {
+                            return (
+                                <Item  key={i} onClick={() => chooseNum(n)}>0 (Delete)</Item>
                             )
                         }
                         return (
-                            <Item  key={i} onClick={() => toggleSetNum(n)}>{n}</Item>
+                            <Item  key={i} onClick={() => chooseNum(n)}>{n}</Item>
                         )
                     })}
                 </Menu>

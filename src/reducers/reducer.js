@@ -19,13 +19,24 @@ const reducer = (state, action) => {
     switch(action.type) {
         case 'ADD_TO_BASKET':
             let isSameItem = false;
+            const returnQuantity = (product) => {
+                return product.quantity ? product.quantity : 1
+            } 
             state.basket.forEach(product => {
                 if (product.id === action.item.id) {
-                    console.log("This item had been already added")
                     isSameItem = true;
                 }
             })
-            if (isSameItem) return { ...state };
+            if (isSameItem) {
+                return { 
+                    ...state,
+                    basket: state.basket.map(product => 
+                        product.id === action.item.id 
+                            ? { ...product, quantity: returnQuantity(product) + returnQuantity(action.item) } 
+                            : product
+                    )
+                };
+            }
             return {
                 ...state,
                 basket: [...state.basket, action.item]

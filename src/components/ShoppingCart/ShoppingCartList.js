@@ -3,7 +3,8 @@ import ShoppingCartProductSp from './ShoppingCartProductSp';
 import styled from 'styled-components';
 import useWindowWidthState from '../../hooks/useWindowWidthState';
 import { useStateValue } from '../../contexts/StateProvider';
-import useBasketTotal from '../../hooks/useBasketTotal';
+import { useBasketTotal, useNumOfItems } from '../../hooks/useBasket';
+import CurrencyFormat from 'react-currency-format';
   
 const Cart = styled.section`
     padding: 20px;
@@ -55,10 +56,12 @@ const Subtotal = styled.div`
 `;
 
 function ShoppingCartList({products}) {
-    const num = products.length;
     const windowWidth = useWindowWidthState();
-    const [{ basket, user }, dispatch] = useStateValue();
+    // eslint-disable-next-line no-unused-vars
+    const [_, dispatch] = useStateValue();
     const subtotal = useBasketTotal();
+    const numOfItems = useNumOfItems();
+    const itemsText = numOfItems === 1 ? 'item' : 'items'
     //Add firebase with useEffect later...
     const removeFromBasket = (id) => {
         dispatch({
@@ -83,23 +86,23 @@ function ShoppingCartList({products}) {
                 </Top>
             ) : ("")}
             { windowWidth > 579 ? (
-                products.map((d, i) => {
+                products.map((product, i) => {
                     return (
                         <ProductContainer key={i}>
                             <ShoppingCartProduct 
-                                product={products[i]}
-                                remove={() => removeFromBasket(products[i].id)}
+                                product={product}
+                                remove={() => removeFromBasket(product.id)}
                             />
                         </ProductContainer>
                     )
                 })
             ) : (
-                products.map((d, i) => {
+                products.map((product, i) => {
                     return (
                         <ProductContainer key={i}>
                             <ShoppingCartProductSp 
-                                product={products[i]}
-                                remove={() => removeFromBasket(products[i].id)}
+                                product={product}
+                                remove={() => removeFromBasket(product.id)}
                                 setQuantity={setQuantity} 
                             />
                         </ProductContainer>
@@ -108,7 +111,17 @@ function ShoppingCartList({products}) {
             )}
             { windowWidth > 579 ? (
                 <Subtotal>
-                    Subtotal ({num} items): <span style={{fontWeight: "600"}}>${subtotal}</span>
+                    Subtotal ({numOfItems} {itemsText}): 
+                    <span style={{fontWeight: "600"}}>
+                    <CurrencyFormat 
+                        value={subtotal} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={'$'} 
+                        decimalScale={2} 
+                        fixedDecimalScale={true} 
+                    />
+                    </span>
                 </Subtotal>
             ) : ("")}
         </Cart>

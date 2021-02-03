@@ -6,6 +6,7 @@ import { Search } from "@material-ui/icons";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import amazonLogo from '../../assets/amazon-logo-white-768x232.png';
 import { auth } from '../../firebase';
+import { useNumOfItems } from '../../hooks/useBasket';
 
 const HeaderStyles = styled.div`
   min-height: 100px;
@@ -103,7 +104,8 @@ const HeaderStyles = styled.div`
 
 function Header() {
 
-  const [{ basket, user }] = useStateValue();
+  const [{ user }] = useStateValue();
+  const numOfItems = useNumOfItems();
 
   function handleAuthentication() {
     if (user) {
@@ -146,7 +148,8 @@ function Header() {
         <Link to="/checkout">
           <div className="optionBasket">
             <ShoppingCartIcon />
-            <span className="optionLineTwo basketCount">{basket?.length}</span>
+            {/* <span className="optionLineTwo basketCount">{basket?.length}</span> */}
+            <span className="optionLineTwo basketCount">{numOfItems}</span>
           </div>
         </Link>
       </div>
