@@ -79,7 +79,7 @@ const SelectedItem = styled.li`
 
 function DropdownMenu({product, zeroOption}) {
     const [opened, toggleOpened] = useToggleState(false);
-    const [quantity, setQuantity] = useQuantity(product.id);
+    const [quantity, setQuantity] = useQuantity(product);
     const option = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     if (zeroOption) option.unshift(0);
     const chooseNum = (n) => {
@@ -90,7 +90,7 @@ function DropdownMenu({product, zeroOption}) {
   return (
     <Button>
         <ButtonTop onClick={toggleOpened}>
-            <Text><span style={{paddingRight: "5px"}}>Qty:</span> {quantity}</Text>
+            <Text><span style={{paddingRight: "5px"}}>Qty:</span>{quantity}</Text>
             <ExpandMoreIcon style={{transform: "scale(0.9)", paddingRight: "5px"}}/>
         </ButtonTop>
         {opened ? (

@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { useStateValue } from "../contexts/StateProvider";
 
-function useQuantity(productId) {
-    const [presetQuantity, setPresetQuantity] = useState(1);
+function useQuantity(product) {
+    const initialVal = product.quantity ? product.quantity : 1;
+    const [presetQuantity, setPresetQuantity] = useState(initialVal);
     // eslint-disable-next-line no-unused-vars
     const [_, dispatch] = useStateValue();
     const setQuantity = (n) => {
         if (n===0) {
             dispatch({
                 type: 'REMOVE_FROM_BASKET',
-                id: productId,
+                id: product.id,
             })
         } else {
             setPresetQuantity(n)
             dispatch({
                 type: 'SET_QUANTITY',
-                id: productId,
+                id: product.id,
                 quantity: n
             })
         }
