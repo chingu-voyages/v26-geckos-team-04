@@ -65,7 +65,8 @@ const Spacer = styled.div`
 `;
 
 function ShoppingCart() {
-    const [{ basket, user }, dispatch] = useStateValue();
+    // eslint-disable-next-line no-unused-vars
+    const [{ basket }, dispatch] = useStateValue();
     return (
         <ShoppingCartPage>
             <Container>
