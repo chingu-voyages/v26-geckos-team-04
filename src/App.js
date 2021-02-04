@@ -11,6 +11,11 @@ import Footer from './components/Footer/Footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+//public key
+const promise = loadStripe('pk_test_51IHDUzJ48jlA6xWamTOS9FybWpozON23BE7tsmhbPYOvPl0vNAM9SMqKvJ9YsYfyfen1W73y84itTyV1sBEBOJDh00Qc3EwjN1');
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -55,9 +60,10 @@ function App() {
           </Route>
           <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
-            <Header /> 
-            {/* <Payment /> */}
-            <h1>Payment</h1>
+            <Header />
+            <Elements stripe={promise}>
+              {/* <Payment /> */}
+            </Elements> 
           </Route>
           <Route path="/">
             <Header /> 
