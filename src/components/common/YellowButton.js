@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const CheckoutButton = styled.div`
+const CheckoutButton = styled.button`
     text-decoration: none;
     background-image: linear-gradient(to bottom, #faebc8 0%, #f0c14d 100%);
     width: 100%;
-    height: 30px;
+    height: 35px;
     border-radius: 3px;
     border: solid 1px #aaa;
     &:hover {
@@ -22,7 +23,7 @@ const Text = styled.div`
     align-items: center;
     padding: auto;
 `;
-const Link = styled.a`
+const LinkStyle = styled.a`
     text-decoration: none;
     width: 100%;
     height: 100%;
@@ -33,11 +34,20 @@ const Link = styled.a`
 `;
 
 function ProceedToCheckout(props) {
+    console.log(props?.disabledCondition)
   return (
-        <CheckoutButton>
-            <Link href={props.link}>
-                <Text>{props.text}</Text>
-            </Link>
+        <CheckoutButton disabled={props.disabledCondition ? props.disabledCondition : false}>
+            <LinkStyle>
+                {props.disabledCondition ? (
+                    <Link style={{textDecoration: 'none'}}>
+                        <Text>{props.text}</Text>
+                    </Link>
+                ) : (
+                    <Link to={props.link} style={{textDecoration: 'none'}}>
+                        <Text>{props.text}</Text>
+                    </Link>
+                )}
+            </LinkStyle>
         </CheckoutButton>
   );
 }

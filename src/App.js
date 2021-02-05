@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 // import Orders from "./pages/Orders";
 import ShoppingCart from'./pages/ShoppingCart';
+import Payment from './pages/Payment';
 import Login from "./pages/Login";
 import Footer from './components/Footer/Footer';
 // import Login from "./pages/Orders";
@@ -62,7 +63,7 @@ function App() {
           <Route path="/payment">
             <Header />
             <Elements stripe={promise}>
-              {/* <Payment /> */}
+              <Payment />
             </Elements> 
           </Route>
           <Route path="/">

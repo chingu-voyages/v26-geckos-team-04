@@ -1,166 +1,77 @@
 import React from 'react';
 import styled from 'styled-components';
-import CustomizedCheckbox from '../common/CustomizedCheckbox';
-import DropdownQuantity from '../common/DropdownQuantity';
-import { Link } from "react-router-dom";
+import CurrencyFormat from 'react-currency-format';
 
 const ProductContainer = styled.div`
     width: 100%;
-    height: auto;
-    min-width: 642px;
-    min-height: 180px;
-    margin: 12px 0;
-    &:after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-    &:before {
-        content: "";
-    }
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    box-sizing: border-box;
 `;
 const ItemInfo = styled.div`
-    position: relative;
-    margin-right: 2%;
-    float: left;
-    margin-left: 220px;
-    width: 100%;
-
-    @media screen and (max-width: 579px) {
-         margin-left: 130px;
-    }
-`;
-const ItemPrice= styled.div`
-    float: right;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 2;
-`;
-const Details = styled.ul`
-     padding-left: 220px;
-    width: 100%;
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
+    font-size: 14px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-`;
-const Detail = styled.li`
-    width: 100%;
-    font-size: 12px;
-    margin: 2px 0;
-    &:nth-child(2) {
-        color: var(--green);
+    margin-left: 10px;
+    h3 {
+        font-wegith: 300;
+        margin: 5px 0;
+    }
+    p {
+        margin: 3px 0;
     }
 `;
 const Image = styled.div`
-    width: 180px;
-    margin-left: -210px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    & img {
-        object-fit: cover;
-        width: 180px;
-        height: 180px;
-    }
-
-   @media screen and (max-width: 579px) {
-         width: 100px;
-         margin-left: -130px;
-         & img {
-             width: 100px;
-             height: 100px;
-         }
-     }
-
-    &:hover {
-        cursor: pointer;
-    }
-    
-`;
-const Manipulations = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-`;
-const Manipulation = styled.div`
-    width: auto;
-`;
-
-const LinkStyle = styled.div`
-    font-size: 12px;
-    color: var(--dark-green);
-    text-decoration: none; 
-    &:hover {
-        color: var(--red);
-        text-decoration: underline;
-        cursor: pointer;
+    width: 160px;
+    min-width: 160px;
+    max-width: 160px;
+    height: 160px;
+    overflow: hidden;
+    img {
+        width: 100%;
     }
 `;
-const Divider = styled.div`
-    margin: 10px;
-    width: 1px;
-    background: #ddd;
-    height: 14px;
-`;
 
 
-function ShoppingCartProduct({product, remove}) {
+
+function CheckoutProduct({product}) {
+    if (!product.quantity) product.quantity = 1;
   return (
-    <>
         <ProductContainer>
-                <ItemInfo>
-                    <Image>
-                        <div style={{marginRight: "5px"}}>
-                            <CustomizedCheckbox />
-                        </div>
-                        <Link to="/" >
-                            <img src={product.image} alt={product.title} />
-                        </Link>
-                    </Image>
-                    <Details>
-                        <Detail>
-                            <LinkStyle  style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{product.title}</LinkStyle>
-                        </Detail>
-                        <Detail>In Stock</Detail>
-                        <Detail style={{display: "flex", margin: "8px 0"}}>
-                            <CustomizedCheckbox />
-                            <div style={{marginLeft: "5px"}}>This is a gift</div>
-                            <LinkStyle  style={{marginLeft: "4px"}}>Learn more</LinkStyle>
-                        </Detail>
-                    </Details>
-                    <Manipulations>
-                        <DropdownQuantity 
-                            product={product}
-                            zeroOption={true}
-                        />
-                        <Divider />
-                        <Manipulation>
-                            <LinkStyle onClick={remove}>Delete</LinkStyle>
-                        </Manipulation>
-                        <Divider />
-                        <Manipulation>
-                            <LinkStyle>Save for later</LinkStyle>
-                        </Manipulation>
-                        <Divider />
-                        <Manipulation>
-                            <LinkStyle>Compare with similar items</LinkStyle>
-                        </Manipulation>
-                    </Manipulations>
-                </ItemInfo>
-                <ItemPrice>${product.price}</ItemPrice>
+            <Image>
+                <img src={product.image} alt={product.title} />
+            </Image>
+            <ItemInfo>
+                <h3>{product.title}</h3>
+                <p>Price: 
+                    <CurrencyFormat 
+                        value={product.price} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={'$'} 
+                        decimalScale={2} 
+                        fixedDecimalScale={true} 
+                        style={{marginLeft: '3px'}}
+                    />
+                </p>
+                <p>Quantity: {product.quantity}</p>
+                <h4>Unit Price:
+                    <CurrencyFormat 
+                        value={product.price * product.quantity} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={'$'} 
+                        decimalScale={2} 
+                        fixedDecimalScale={true} 
+                        style={{marginLeft: '3px'}}
+                    />
+                </h4>
+            </ItemInfo>
         </ProductContainer>
-    </>
   );
 }
 
-export default ShoppingCartProduct;
+export default CheckoutProduct;
