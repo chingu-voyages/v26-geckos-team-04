@@ -161,12 +161,12 @@ export default function Home() {
                 interval={6000}
                 infiniteLoop={true}
             >
-                {windowWidth > 579 ? desktopCarouselImages.map(image => (
-                    <div>
+                {windowWidth > 579 ? desktopCarouselImages.map((image,i) => (
+                    <div key={i}>
                         <img src={image} alt="carousel banner" />
                     </div>
-                )) : mobileCarouselImages.map(image => (
-                    <div>
+                )) : mobileCarouselImages.map((image,i) => (
+                    <div key={i}>
                         <img src={image} alt="mobile carousel banner" />
                     </div>
                 ))}

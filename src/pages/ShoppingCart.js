@@ -84,7 +84,9 @@ function ShoppingCart() {
                     )}
                 </Main>
                 <Aside>
-                    <ProceedToCheckout />
+                    {basket.length > 0 ? (
+                        <ProceedToCheckout />
+                    ) : ("")}
                 </Aside>
             </Container>
         </ShoppingCartPage>

@@ -55,7 +55,7 @@ function ProceedToCheckout() {
             <CustomizedCheckbox />
             <div style={{marginLeft: "5px"}}>This order contains a gift</div>
         </Gift>
-        <YellowButton text={"Proceed to checkout"} link={"/"} />
+        <YellowButton text={"Proceed to checkout"} link={"/payment"} />
     </Container>
   );
 }

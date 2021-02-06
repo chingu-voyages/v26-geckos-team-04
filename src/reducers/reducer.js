@@ -69,6 +69,11 @@ const reducer = (state, action) => {
                             product.id === action.id ? { ...product, quantity: action.quantity } : product
                         )
             }
+        case "EMPTY_BASKET":
+            return {
+                ...state,
+                basket: []
+            }
         default:
             return state;
     }
