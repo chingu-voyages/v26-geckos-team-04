@@ -29,7 +29,7 @@ const LinkStyle = styled.a`
     height: 100%;
     display: block;
     &:hover {
-        pointer: cursor;
+        cursor: pointer;
     }
 `;
 
