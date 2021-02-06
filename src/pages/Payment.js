@@ -87,6 +87,10 @@ const PaymentMethod = styled.section`
         max-width: 500px;
         // text-align: left;
     }
+    .errorMessage {
+        margin-top: 10px;
+        color: red;
+    }
 `;
 const Divider = styled.div`
     height: 1px;
@@ -116,14 +120,17 @@ function Payment() {
             })
             setClientSecret(response.data.clientSecret)
         }
-        getClientSecret()
+        getClientSecret();
+        console.log("Order Total >>>", orderTotal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [basket])
 
+    console.log("The client secret is >>>>", clientSecret);
+
     const handleSubmit = async (event) => {
-        console.log('submit')
+        console.log('Submit pressed!');
         event.preventDefault();
-        setProcessing(true)
+        setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: { 
@@ -149,6 +156,7 @@ function Payment() {
             history.replace('/orders')
         })
     }
+
     const handleChange = event => {
         console.log('event.empty', event.empty)
         setDisabled(event.empty);
@@ -157,59 +165,65 @@ function Payment() {
     return (
         <PaymentStyle>
             <Container>
-            <Title>Review your orders</Title>
-            <Divider />
-            <Address>
-                <h1>Shipping to:</h1>
-                {/* <p>{user?.name}</p>
-                <p>{user?.address}</p> */}
-                <div>
-                    <p>Andrew Wiggins</p>
-                    <p>45 Bridgeton Street Ambler, PA 19002</p>
-                </div>
-            </Address>
-            <Divider />
-            <ProductsStyle>
-                {basket.map((product, i) => {
-                    return (
-                        <CheckoutProduct 
-                            key={i}
-                            product={product}
-                        />
-                    )
-                })}
-            </ProductsStyle>
-            <Divider />
-            <PaymentMethod>
-                <h3>Payment Method</h3>
-                <div className='card'>
-                    <form onSubmit={handleSubmit}>
-                        <CardElement onChange={handleChange} />
-                    </form>
-                </div>
-            </PaymentMethod>
-            <Divider />
-            <Bottom>
-                <div className='total'>
-                    <span>Order Total:</span> 
-                    <CurrencyFormat 
-                        value={orderTotal} 
-                        displayType={'text'} 
-                        thousandSeparator={true} 
-                        prefix={'$'} 
-                        decimalScale={2} 
-                        fixedDecimalScale={true} 
-                        style={{marginLeft: '15px', color: '#b12704'}}
-                    />    
-                </div>
-                <YellowButton 
-                    link={"/"} 
-                    text={"Place order"}
-                    disabledCondition={processing || disabled || succeed}
-                />
-            </Bottom>
+                <Title>Review your orders</Title>
+                <Divider />
+                <Address>
+                    <h1>Shipping to:</h1>
+                    {/* <p>{user?.name}</p>
+                    <p>{user?.address}</p> */}
+                    <div>
+                        <p>Andrew Wiggins</p>
+                        <p>45 Bridgeton Street Ambler, PA 19002</p>
+                    </div>
+                </Address>
+                <Divider />
+                <ProductsStyle>
+                    {basket.map((product, i) => {
+                        return (
+                            <CheckoutProduct 
+                                key={i}
+                                product={product}
+                            />
+                        )
+                    })}
+                </ProductsStyle>
+                <Divider />
+                <form onSubmit={handleSubmit}>
+                    <PaymentMethod>
+                        <h3>Payment Method</h3>
+                        <div className='card'>
+                            <CardElement onChange={handleChange} />
+                            {error && <div className="errorMessage">{error}</div>}
+                        </div>
+                    </PaymentMethod>
+                    <Divider />
+                    <Bottom>
+                        <div className='total'>
+                            <span>Order Total:</span> 
+                            <CurrencyFormat 
+                                value={orderTotal} 
+                                displayType={'text'} 
+                                thousandSeparator={true} 
+                                prefix={'$'} 
+                                decimalScale={2} 
+                                fixedDecimalScale={true} 
+                                style={{marginLeft: '15px', color: '#b12704'}}
+                            />    
+                        </div>
+                        {/* <YellowButton 
+                            link={"/"} 
+                            text={"Place order"}
+                            disabledCondition={processing || disabled || succeed}
+                        /> */}
+                        <button
+                        type="submit"
+                        disabled={processing || disabled || succeed}
+                        >Place Order</button>
+                    </Bottom>
+                </form>
+
             </Container>
-            {error && <div>{error}</div>}
+            
         </PaymentStyle>
     )
 }
