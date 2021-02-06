@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StateProvider } from './contexts/StateProvider';
 import reducer, { initialState } from './reducers/reducer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
