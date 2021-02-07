@@ -127,7 +127,7 @@ function Header() {
         <Search className="searchIcon" />
       </div>
       <div className="nav">
-        <Link to={!user && "/login"}>
+        <Link to={!user? "/login" : "/"}>
           <div onClick={handleAuthentication} className="option">
             <span className="optionLineOne">Hello {user? user.email : 'Guest'}</span>
             <span className="optionLineTwo">

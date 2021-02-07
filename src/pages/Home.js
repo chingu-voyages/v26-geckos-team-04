@@ -161,28 +161,28 @@ export default function Home() {
                 interval={6000}
                 infiniteLoop={true}
             >
-                {windowWidth > 579 ? desktopCarouselImages.map((image,i) => (
-                    <div key={i}>
-                        <img src={image} alt="carousel banner" />
+                {windowWidth > 579 ? desktopCarouselImages.map((image, i) => (
+                    <div key={`desktop-carousel-banner-${i}`}>
+                        <img src={image} alt="desktop carousel banner" />
                     </div>
-                )) : mobileCarouselImages.map((image,i) => (
-                    <div key={i}>
+                )) : mobileCarouselImages.map((image, i) => (
+                    <div key={`mobile-carousel-banner-${i}`}>
                         <img src={image} alt="mobile carousel banner" />
                     </div>
                 ))}
             </Carousel>
             <div className="product-grid">
                 {products && shuffleArray(products).map(product => (
-                    <Link to={`/product/${product.id}`} className="grid-item"><ProductPreview key={product.id} image={product.image} title={product.title} /></Link>
+                    <Link to={`/product/${product.id}`} className="grid-item" key={`product-grid-item-${product.id}`}><ProductPreview  image={product.image} title={product.title} /></Link>
                 ))}
                 <Slider className="sliderOne" {...sliderSettings}>
                     {products && shuffleArray(products).map(product => (
-                        <Link to={`/product/${product.id}`}><img className="slider-image" alt={product.title} src={product.image} /></Link>
+                        <Link to={`/product/${product.id}`} key={`slider-one-item-${product.id}`}><img className="slider-image" alt={product.title} src={product.image} /></Link>
                     ))}
                 </Slider>
                 <Slider className="sliderTwo" {...sliderSettings}>
                     {products && shuffleArray(products).map(product => (
-                        <Link to={`/product/${product.id}`}><img className="slider-image" alt={product.title} src={product.image} /></Link>
+                        <Link to={`/product/${product.id}`} key={`slider-two-item-${product.id}`}><img className="slider-image" alt={product.title} src={product.image} /></Link>
                     ))}
                 </Slider>
             </div>

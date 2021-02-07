@@ -15,8 +15,7 @@ import { useStateValue } from "./contexts/StateProvider";
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-//public key
-const promise = loadStripe('pk_test_51IHDUzJ48jlA6xWamTOS9FybWpozON23BE7tsmhbPYOvPl0vNAM9SMqKvJ9YsYfyfen1W73y84itTyV1sBEBOJDh00Qc3EwjN1');
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -25,10 +24,8 @@ function App() {
   useEffect(()=> {
 
       auth.onAuthStateChanged(authUser => {
-        console.log('The USER is >>>', authUser);
 
       if(authUser) {
-
         dispatch({
           type:'SET_USER',
           user: authUser
@@ -45,11 +42,9 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
         <Switch>
           <Route path="/login">
             <Login />
-            <h1>Log in</h1>
           </Route>
           <Route path="/orders">
             <Header /> 
@@ -72,7 +67,6 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
     </Router>
   );
 }
