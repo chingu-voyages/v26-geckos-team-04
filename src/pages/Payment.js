@@ -137,16 +137,16 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
-            db
-                .collection('users')
-                .doc(user?.uid)
-                .collection('orders')
-                .doc(paymentIntent.id)
-                .set({
-                    basket: basket,
-                    amount: paymentIntent.amount,
-                    created: paymentIntent.created
-                });
+            // db
+            //     .collection('users')
+            //     .doc(user?.uid)
+            //     .collection('orders')
+            //     .doc(paymentIntent.id)
+            //     .set({
+            //         basket: basket,
+            //         amount: paymentIntent.amount,
+            //         created: paymentIntent.created
+            //     });
             setSucceed(true)
             setError(null)
             setProcessing(false)
@@ -210,15 +210,15 @@ function Payment() {
                                 style={{marginLeft: '15px', color: '#b12704'}}
                             />    
                         </div>
-                        {/* <YellowButton 
-                            link={"/"} 
+                        <YellowButton 
+                            type={'submit'}
                             text={"Place order"}
                             disabledCondition={processing || disabled || succeed}
-                        /> */}
-                        <button
+                        />
+                        {/* <button
                         type="submit"
                         disabled={processing || disabled || succeed}
-                        >Place Order</button>
+                        >Place Order</button> */}
                     </Bottom>
                 </form>
 
