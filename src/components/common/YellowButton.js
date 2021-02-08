@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
 
 const CheckoutButtonDisabled = styled.button`
     text-decoration: none;
@@ -27,35 +26,8 @@ const Text = styled.div`
     align-items: center;
     padding: auto;
 `;
-// const LinkStyle = styled.a`
-//     text-decoration: none;
-//     width: 100%;
-//     height: 100%;
-//     display: block;
-//     &:hover {
-//         cursor: pointer;
-//     }
-// `;
 
-// function ProceedToCheckout(props) {
-//   return (
-//         <CheckoutButton 
-//             disabled={props.disabledCondition ? props.disabledCondition : false}>
-//             <LinkStyle>
-//                 {props.disabledCondition ? (
-//                     <Link style={{textDecoration: 'none'}}>
-//                         <Text>{props.text}</Text>
-//                     </Link>
-//                 ) : (
-//                     <Link to={props.link} style={{textDecoration: 'none'}}>
-//                         <Text>{props.text}</Text>
-//                     </Link>
-//                 )}
-//             </LinkStyle>
-//         </CheckoutButton>
-//   );
-// }
-function ProceedToCheckout({disabledCondition, text, type}) {
+function YellowButton({disabledCondition, text, type}) {
   return (
         disabledCondition ? (
             <CheckoutButtonDisabled disabled={disabledCondition} type={type}>
@@ -69,4 +41,4 @@ function ProceedToCheckout({disabledCondition, text, type}) {
   );
 }
   
-export default ProceedToCheckout;
+export default YellowButton;
