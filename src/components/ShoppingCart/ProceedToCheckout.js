@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import YellowButton from '../common/YellowButton';
@@ -55,7 +56,9 @@ function ProceedToCheckout() {
             <CustomizedCheckbox />
             <div style={{marginLeft: "5px"}}>This order contains a gift</div>
         </Gift>
-        <YellowButton text={"Proceed to checkout"} link={"/payment"} />
+        <Link to='/payment'>
+            <YellowButton text={"Proceed to checkout"} type={'button'}/>
+        </Link>
     </Container>
   );
 }
