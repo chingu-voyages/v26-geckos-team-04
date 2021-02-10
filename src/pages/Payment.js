@@ -11,6 +11,7 @@ import CurrencyFormat from 'react-currency-format';
 import axios from '../api/axios';
 import { db } from '../firebase';
 
+
 const PaymentStyle = styled.section`
     width: 100%;
     height: 100%;
