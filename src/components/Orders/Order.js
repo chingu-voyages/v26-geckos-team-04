@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CheckoutProduct from '../Payment/CheckoutProduct';
 import CurrencyFormat from 'react-currency-format';
-import Moment from 'react-moment';
+import moment from 'moment';
 const OrderStyle = styled.section`
     width: 100%;
     border: solid 1px #ddd;
@@ -37,13 +37,12 @@ const Top = styled.div`
 `;
 
 function Order({order}) {
-    // const date = new Date(order.data?.created * 1000)
     return (
         <OrderStyle>
             <Top>
                 <div>
                     <p>ORDER PLACED</p>
-                    <p><Moment unix>{order.data?.created}</Moment></p>
+                    <p>{moment.unix(order.data?.created).format('MMMM Do, YYYY')}</p>
                 </div>
                 <div style={{marginLeft: "50px"}}>
                     <p>TOTAL</p>

@@ -114,13 +114,11 @@ function Payment() {
     const [clientSecret, setClientSecret] = useState(true)
 
     useEffect(() => {
-        console.log('client secret called')
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
                 url: `/payments/create?total=${orderTotal * 100}`
             })
-            console.log(response)
             setClientSecret(response.data.clientSecret)
         }
         getClientSecret();
@@ -140,16 +138,16 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
-            // db
-            //     .collection('users')
-            //     .doc(user?.uid)
-            //     .collection('orders')
-            //     .doc(paymentIntent.id)
-            //     .set({
-            //         basket: basket,
-            //         amount: paymentIntent.amount,
-            //         created: paymentIntent.created
-            //     });
+            db
+                .collection('users')
+                .doc(user?.uid)
+                .collection('orders')
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created
+                });
             setSucceed(true)
             setError(null)
             setProcessing(false)
