@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import CheckoutProduct from '../Payment/CheckoutProduct';
 import CurrencyFormat from 'react-currency-format';
+<<<<<<< HEAD
 import moment from 'moment';
+=======
+import Moment from 'react-moment';
+>>>>>>> 67572ea67e17fc46100f54a76ac56363ebf7e063
 const OrderStyle = styled.section`
     width: 100%;
     border: solid 1px #ddd;
