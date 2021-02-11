@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CheckoutButton = styled.div`
+const CheckoutButtonDisabled = styled.button`
     text-decoration: none;
-    background-image: linear-gradient(to bottom, #faebc8 0%, #f0c14d 100%);
+    background-image: linear-gradient(to bottom, #d1c29f 0%, #c8991a 100%);
     width: 100%;
-    height: 30px;
+    height: 35px;
     border-radius: 3px;
     border: solid 1px #aaa;
+`;
+const CheckoutButton = styled(CheckoutButtonDisabled)`
+    background-image: linear-gradient(to bottom, #faebc8 0%, #f0c14d 100%);
     &:hover {
+        cursor: pointer;
         background-image: linear-gradient(to bottom, #f1e2bf 0%, #e8b93a 100%);
     }
 `;
@@ -22,24 +26,19 @@ const Text = styled.div`
     align-items: center;
     padding: auto;
 `;
-const Link = styled.a`
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: block;
-    &:hover {
-        pointer: cursor;
-    }
-`;
 
-function ProceedToCheckout(props) {
+function YellowButton({disabledCondition, text, type}) {
   return (
-        <CheckoutButton>
-            <Link href={props.link}>
-                <Text>{props.text}</Text>
-            </Link>
-        </CheckoutButton>
+        disabledCondition ? (
+            <CheckoutButtonDisabled disabled={disabledCondition} type={type}>
+                <Text>{text}</Text>
+            </CheckoutButtonDisabled>
+        ) : (
+            <CheckoutButton type={type}>
+                <Text>{text}</Text>
+            </CheckoutButton>
+        )
   );
 }
   
-export default ProceedToCheckout;
+export default YellowButton;

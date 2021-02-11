@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Header from './components/Header/Header';
 import Home from "./pages/Home";
 import Product from "./pages/Product";
-// import Orders from "./pages/Orders";
+import Orders from "./pages/Orders";
 import ShoppingCart from'./pages/ShoppingCart';
+import Payment from './pages/Payment';
 import Login from "./pages/Login";
 import Footer from './components/Footer/Footer';
 // import Login from "./pages/Orders";
@@ -11,6 +12,10 @@ import Footer from './components/Footer/Footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { auth } from "./firebase";
 import { useStateValue } from "./contexts/StateProvider";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -19,10 +24,8 @@ function App() {
   useEffect(()=> {
 
       auth.onAuthStateChanged(authUser => {
-        console.log('The USER is >>>', authUser);
 
       if(authUser) {
-
         dispatch({
           type:'SET_USER',
           user: authUser
@@ -39,15 +42,13 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
         <Switch>
           <Route path="/login">
             <Login />
-            <h1>Log in</h1>
           </Route>
           <Route path="/orders">
             <Header /> 
-            {/* <Orders /> */}
+            <Orders />
           </Route>
           <Route path="/checkout">
             <Header /> 
@@ -55,9 +56,10 @@ function App() {
           </Route>
           <Route path="/product/:productId" component={Product} />
           <Route path="/payment">
-            <Header /> 
-            {/* <Payment /> */}
-            <h1>Payment</h1>
+            <Header />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements> 
           </Route>
           <Route path="/">
             <Header /> 
@@ -65,7 +67,6 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
     </Router>
   );
 }
