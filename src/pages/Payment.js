@@ -114,11 +114,13 @@ function Payment() {
     const [clientSecret, setClientSecret] = useState(true)
 
     useEffect(() => {
+        console.log('client secret called')
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
                 url: `/payments/create?total=${orderTotal * 100}`
             })
+            console.log(response)
             setClientSecret(response.data.clientSecret)
         }
         getClientSecret();
