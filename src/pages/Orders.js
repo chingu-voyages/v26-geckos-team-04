@@ -21,7 +21,7 @@ const OrdersStyle = styled.section`
     padding-bottom: 200px;
 
     @media screen and (max-width: 579px) {
-        // padding: 0;
+        padding: 40px 0px;
         min-width: 332px;
     }
 `;
@@ -42,6 +42,7 @@ const Container = styled.div`
     padding: 20px;
     border-radius: 10px;
     border: solid 2px #ddd;
+    box-sizing: border-box;
 
     h1 {
         font-weight: 300;

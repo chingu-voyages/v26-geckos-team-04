@@ -36,6 +36,7 @@ const Container = styled.div`
     padding: 20px;
     border-radius: 10px;
     border: solid 2px #ddd;
+    box-sizing: border-box;
 `;
 const Address = styled.div`
     font-size: 15px;
@@ -98,6 +99,11 @@ const Divider = styled.div`
     width: 100%;
     border-bottom: solid 1px #bbb;
     margin: 20px 0;
+`;
+const Table = styled.tbody`
+    td {
+        width: 120px;
+    }
 `;
 
 function Payment() {
@@ -164,6 +170,7 @@ function Payment() {
         setError(event.error ? event.error.message : "");
     }
     return (
+        <>
         <PaymentStyle>
             <Container>
                 <Title>Review your orders</Title>
@@ -222,10 +229,30 @@ function Payment() {
                         >Place Order</button> */}
                     </Bottom>
                 </form>
-
             </Container>
             
         </PaymentStyle>
+        <PaymentStyle style={{padding: '0'}}>
+            <Container>
+                <p>This is fake payment.</p>
+                <p>Please use fake card information.</p>
+                <Table>
+                    <tr>
+                        <td>Card number:</td>
+                        <td style={{width: '180px'}}>4242 4242 4242 4242</td>
+                    </tr>
+                    <tr>
+                        <td>MM / YY:</td>
+                        <td>04 / 30</td>
+                    </tr>
+                    <tr>
+                        <td>CVC:</td>
+                        <td>44444</td>
+                    </tr>
+                </Table>
+            </Container>
+        </PaymentStyle>
+        </>
     )
 }
 
