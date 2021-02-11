@@ -11,6 +11,7 @@ import CurrencyFormat from 'react-currency-format';
 import axios from '../api/axios';
 import { db } from '../firebase';
 
+
 const PaymentStyle = styled.section`
     width: 100%;
     height: 100%;
@@ -137,16 +138,16 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
-            // db
-            //     .collection('users')
-            //     .doc(user?.uid)
-            //     .collection('orders')
-            //     .doc(paymentIntent.id)
-            //     .set({
-            //         basket: basket,
-            //         amount: paymentIntent.amount,
-            //         created: paymentIntent.created
-            //     });
+            db
+                .collection('users')
+                .doc(user?.uid)
+                .collection('orders')
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created
+                });
             setSucceed(true)
             setError(null)
             setProcessing(false)
