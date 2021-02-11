@@ -5,6 +5,7 @@ import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import YellowButton from '../common/YellowButton';
 import { useBasketTotal, useNumOfItems } from '../../hooks/useBasket';
 import CurrencyFormat from 'react-currency-format';
+import { useStateValue } from '../../contexts/StateProvider';
 
 const Container = styled.section`
     width: 260px;
@@ -33,9 +34,10 @@ const Gift = styled.div`
 `;
 
 function ProceedToCheckout() {
+    const [{ user }] = useStateValue();
     const subtotal = useBasketTotal();
     const numOfItems = useNumOfItems();
-    const itemsText = numOfItems === 1 ? 'item' : 'items'
+    const itemsText = numOfItems === 1 ? 'item' : 'items';
   return (
     
     <Container>
@@ -55,10 +57,22 @@ function ProceedToCheckout() {
         <Gift>
             <CustomizedCheckbox />
             <div style={{marginLeft: "5px"}}>This order contains a gift</div>
-        </Gift>
-        <Link to='/payment'>
-            <YellowButton text={"Proceed to checkout"} type={'button'}/>
-        </Link>
+        </Gift>        
+        {user ? (
+            <Link to='/payment'>
+                <YellowButton 
+                    text={"Proceed to checkout"} 
+                    type={'button'}
+                />
+            </Link>
+            ) : (
+            <Link to='/login'>
+                <YellowButton 
+                    text={"Login in & buy"} 
+                    type={'button'}
+                />
+            </Link>
+        )}
     </Container>
   );
 }
