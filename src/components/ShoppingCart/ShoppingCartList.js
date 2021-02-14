@@ -29,16 +29,16 @@ const Title = styled.div`
     line-height: 1.5;
 `;
 
-const Link = styled.a`
-    font-size: 14px;
-    color: var(--dark-green);
-    text-decoration: none; 
-    &:hover {
-        color: var(--red);
-        text-decoration: underline;
-        cursor: pointer;
-    }
-`;
+// const Link = styled.a`
+//     font-size: 14px;
+//     color: var(--dark-green);
+//     text-decoration: none; 
+//     &:hover {
+//         color: var(--red);
+//         text-decoration: underline;
+//         cursor: pointer;
+//     }
+// `;
 const PriceTag = styled.div`
     width: 100%;
     text-align: right;
@@ -81,7 +81,7 @@ function ShoppingCartList({products}) {
             { windowWidth > 579 ? (
                 <Top>
                     <Title>Shopping Cart</Title>
-                    <Link>Deselect all items</Link>
+                    {/* <Link>Deselect all items</Link> */}
                     <PriceTag>Price</PriceTag>
                 </Top>
             ) : ("")}

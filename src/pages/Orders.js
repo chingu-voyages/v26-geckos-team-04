@@ -78,7 +78,7 @@ function Orders() {
         <OrdersStyle>
             <Container>
                 <h1>Your Orders</h1>
-                {user && orders ? (
+                {orders && orders.length > 0 ? (
                     orders?.map((order, i) => (
                         <Order order={order} key={i} />
                     ))

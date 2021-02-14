@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CopyRightStyle = styled.ul`
@@ -26,9 +27,9 @@ a {
 export default function CopyRight() {
     return (
         <CopyRightStyle>
-            <CopyRightContent><a href="/">Conditions of Use & Sale</a></CopyRightContent>
-            <CopyRightContent><a href="/">Privacy Notice</a></CopyRightContent>
-            <CopyRightContent><a href="/">Interest-Based Ads Notice</a></CopyRightContent>
+            <CopyRightContent><Link to="/">Conditions of Use & Sale</Link></CopyRightContent>
+            <CopyRightContent><Link to="/">Privacy Notice</Link></CopyRightContent>
+            <CopyRightContent><Link to="/">Interest-Based Ads Notice</Link></CopyRightContent>
             <CopyRightContent><span>© 1996-2020, Amazon.com, Inc. or its affiliates</span></CopyRightContent>
         </CopyRightStyle>
     )

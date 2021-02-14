@@ -113,11 +113,11 @@ function Payment() {
     const orderTotal = useBasketTotal();
     const history = useHistory();
 
-    const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState(null)
-    const [processing, setProcessing] = useState('')
-    const [succeed, setSucceed] = useState(false)
     const [clientSecret, setClientSecret] = useState(true)
+    // const [disabled, setDisabled] = useState(true)
+    // const [processing, setProcessing] = useState('')
+    // const [succeed, setSucceed] = useState(false)
 
     useEffect(() => {
         const getClientSecret = async () => {
@@ -137,13 +137,18 @@ function Payment() {
     const handleSubmit = async (event) => {
         console.log('Submit pressed!');
         event.preventDefault();
-        setProcessing(true);
+        // setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: { 
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
+            if(!paymentIntent) {
+                alert('The card information is invalid.')
+                return;
+            }
+            console.log('payment',paymentIntent)
             db
                 .collection('users')
                 .doc(user?.uid)
@@ -154,9 +159,9 @@ function Payment() {
                     amount: paymentIntent.amount,
                     created: paymentIntent.created
                 });
-            setSucceed(true)
             setError(null)
-            setProcessing(false)
+            // setSucceed(true)
+            // setProcessing(false)
             dispatch({
                 type: 'EMPTY_BASKET'
             })
@@ -166,7 +171,7 @@ function Payment() {
 
     const handleChange = event => {
         console.log('event.empty', event.empty)
-        setDisabled(event.empty);
+        // setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     }
     return (
@@ -221,7 +226,7 @@ function Payment() {
                         <YellowButton 
                             type={'submit'}
                             text={"Place order"}
-                            disabledCondition={processing || disabled || succeed}
+                            // disabledCondition={processing || disabled || succeed}
                         />
                         {/* <button
                         type="submit"
@@ -247,6 +252,10 @@ function Payment() {
                     </tr>
                     <tr>
                         <td>CVC:</td>
+                        <td>444</td>
+                    </tr>
+                    <tr>
+                        <td>ZIP:</td>
                         <td>44444</td>
                     </tr>
                 </Table>

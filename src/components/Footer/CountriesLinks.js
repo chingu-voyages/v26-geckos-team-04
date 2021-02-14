@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/footer-logo-transparent.png";
 import { countries, amazonServices } from './footerlinks';
 
@@ -46,13 +47,17 @@ export default function CountiresLinks () {
             </FooterLogo>
             <CountriesStyle>
                 {countries.map((country,i) => (
-                    <Country key={i}><a href={country.url}>{country.name}</a></Country>
+                    <Country key={i}>
+                        <Link to={country.url}>{country.name}</Link>
+                    </Country>
                 ))}
             </CountriesStyle>
             <CountriesStyle>
                 <div>And don't forget:</div>
                 {amazonServices.map((service,i) => (
-                    <Country key={i} style={{borderLeft: i===0 ? "none" : ""}}><a href={service.url}>{service.name}</a></Country>
+                    <Country key={i} style={{borderLeft: i===0 ? "none" : ""}}>
+                        <Link to={service.url}>{service.name}</Link>
+                    </Country>
                 ))}
             </CountriesStyle>
         </>

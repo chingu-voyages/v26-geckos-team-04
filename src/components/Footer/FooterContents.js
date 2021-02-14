@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { footerlinks } from './footerlinks';
 const ContentsTable = styled.div`
@@ -49,7 +50,7 @@ export default function FooterContents() {
                             <ContentTitle>{footerContents.title}</ContentTitle>
                             {footerContents.contents.map((footercontent, j) => (
                                 <ContentLine key={j}>
-                                    <a href={footercontent.url}>{footercontent.content}</a>
+                                    <Link to={footercontent.url}>{footercontent.content}</Link>
                                 </ContentLine>
                             ))}
                         </ContentsCell>

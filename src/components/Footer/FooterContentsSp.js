@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { footerlinkssp } from './footerlinkssp';
 const ContentsFlex = styled.div`
@@ -26,7 +27,7 @@ export default function FooterContentsSp() {
         <ContentsFlex>
                 {footerlinkssp.map((footercontent, j) => (
                     <ContentTitle key={j}>
-                        <a href={footercontent.url}>{footercontent.content}</a>
+                        <Link to={footercontent.url}>{footercontent.content}</Link>
                     </ContentTitle>
                 ))}
         </ContentsFlex>

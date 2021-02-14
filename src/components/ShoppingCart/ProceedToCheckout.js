@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import CustomizedCheckbox from '../common/CustomizedCheckbox';
+// import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import YellowButton from '../common/YellowButton';
 import { useBasketTotal, useNumOfItems } from '../../hooks/useBasket';
 import CurrencyFormat from 'react-currency-format';
@@ -23,15 +23,16 @@ const Subtotal = styled.div`
     text-align: left;
     font-size: 18px;
     line-height: 1.5;
+    margin-bottom: 15px;
 `;
-const Gift = styled.div`
-    width: 100%;
-    text-align: left;
-    color: #0f1111;
-    font-size: 14px;
-    display: flex;
-    margin: 8px 0;
-`;
+// const Gift = styled.div`
+//     width: 100%;
+//     text-align: left;
+//     color: #0f1111;
+//     font-size: 14px;
+//     display: flex;
+//     margin: 8px 0;
+// `;
 
 function ProceedToCheckout() {
     const [{ user }] = useStateValue();
@@ -54,10 +55,10 @@ function ProceedToCheckout() {
                 />
             </span>
         </Subtotal>
-        <Gift>
+        {/* <Gift>
             <CustomizedCheckbox />
             <div style={{marginLeft: "5px"}}>This order contains a gift</div>
-        </Gift>        
+        </Gift>         */}
         {user ? (
             <Link to='/payment'>
                 <YellowButton 
