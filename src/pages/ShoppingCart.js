@@ -79,9 +79,9 @@ function ShoppingCart() {
                     ) : (
                         <ShoppingCartList products={basket} />
                     )}
-                    {/* {wishlist.length > 0 ? ( */}
+                    {wishlist.length > 0 ? (
                         <Wishlist />
-                    {/* ) : ('')} */}
+                    ) : ('')}
                 </Main>
                 <Aside>
                     {basket.length > 0 ? (

@@ -81,7 +81,7 @@ const Link = styled.div`
     font-size: 12px;
 `;
 
-function ShoppingCartProduct({product, remove, setQuantity}) {
+function ShoppingCartProduct({product, remove, setQuantity, save}) {
     //Checkbox from material ui
     // eslint-disable-next-line no-unused-vars
     const [checked, setChecked] = useState(true);
@@ -116,7 +116,7 @@ function ShoppingCartProduct({product, remove, setQuantity}) {
                         <Link onClick={remove}>Delete</Link>
                     </Manipulation>
                     <Manipulation>
-                        <Link>Save for later</Link>
+                        <Link onClick={save}>Move to wishlist</Link>
                     </Manipulation>
                 </div>
             </Manipulations>

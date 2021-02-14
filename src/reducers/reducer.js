@@ -102,13 +102,6 @@ const reducer = (state, action) => {
                             product.id === action.id ? { ...product, quantity: action.quantity } : product
                         )
             }
-        case "SET_WISHLIST_QUANTITY":
-            return {
-                ...state,
-                wishlist: state.wishlist.map(product => 
-                            product.id === action.id ? { ...product, quantity: action.quantity } : product
-                        )
-            }
         case "MOVE_TO_WISHLIST":
             const moveToWishlistItem = state.basket.filter(product => product.id === action.id)[0]
             return {
