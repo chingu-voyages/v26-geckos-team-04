@@ -36,6 +36,7 @@ const Container = styled.div`
     padding: 20px;
     border-radius: 10px;
     border: solid 2px #ddd;
+    box-sizing: border-box;
 `;
 const Address = styled.div`
     font-size: 15px;
@@ -99,6 +100,11 @@ const Divider = styled.div`
     border-bottom: solid 1px #bbb;
     margin: 20px 0;
 `;
+const Table = styled.tbody`
+    td {
+        width: 120px;
+    }
+`;
 
 function Payment() {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -107,11 +113,11 @@ function Payment() {
     const orderTotal = useBasketTotal();
     const history = useHistory();
 
-    const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState(null)
-    const [processing, setProcessing] = useState('')
-    const [succeed, setSucceed] = useState(false)
     const [clientSecret, setClientSecret] = useState(true)
+    // const [disabled, setDisabled] = useState(true)
+    // const [processing, setProcessing] = useState('')
+    // const [succeed, setSucceed] = useState(false)
 
     useEffect(() => {
         const getClientSecret = async () => {
@@ -131,13 +137,18 @@ function Payment() {
     const handleSubmit = async (event) => {
         console.log('Submit pressed!');
         event.preventDefault();
-        setProcessing(true);
+        // setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: { 
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
+            if(!paymentIntent) {
+                alert('The card information is invalid.')
+                return;
+            }
+            console.log('payment',paymentIntent)
             db
                 .collection('users')
                 .doc(user?.uid)
@@ -148,9 +159,9 @@ function Payment() {
                     amount: paymentIntent.amount,
                     created: paymentIntent.created
                 });
-            setSucceed(true)
             setError(null)
-            setProcessing(false)
+            // setSucceed(true)
+            // setProcessing(false)
             dispatch({
                 type: 'EMPTY_BASKET'
             })
@@ -160,10 +171,11 @@ function Payment() {
 
     const handleChange = event => {
         console.log('event.empty', event.empty)
-        setDisabled(event.empty);
+        // setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     }
     return (
+        <>
         <PaymentStyle>
             <Container>
                 <Title>Review your orders</Title>
@@ -214,7 +226,7 @@ function Payment() {
                         <YellowButton 
                             type={'submit'}
                             text={"Place order"}
-                            disabledCondition={processing || disabled || succeed}
+                            // disabledCondition={processing || disabled || succeed}
                         />
                         {/* <button
                         type="submit"
@@ -222,10 +234,34 @@ function Payment() {
                         >Place Order</button> */}
                     </Bottom>
                 </form>
-
             </Container>
             
         </PaymentStyle>
+        <PaymentStyle style={{padding: '0'}}>
+            <Container>
+                <p>This is fake payment.</p>
+                <p>Please use fake card information.</p>
+                <Table>
+                    <tr>
+                        <td>Card number:</td>
+                        <td style={{width: '180px'}}>4242 4242 4242 4242</td>
+                    </tr>
+                    <tr>
+                        <td>MM / YY:</td>
+                        <td>04 / 30</td>
+                    </tr>
+                    <tr>
+                        <td>CVC:</td>
+                        <td>444</td>
+                    </tr>
+                    <tr>
+                        <td>ZIP:</td>
+                        <td>44444</td>
+                    </tr>
+                </Table>
+            </Container>
+        </PaymentStyle>
+        </>
     )
 }
 

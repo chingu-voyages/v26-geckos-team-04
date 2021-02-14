@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CustomizedCheckbox from '../common/CustomizedCheckbox';
+// import CustomizedCheckbox from '../common/CustomizedCheckbox';
 import DropdownQuantity from '../common/DropdownQuantity';
 import { Link } from "react-router-dom";
 
@@ -120,9 +120,9 @@ function ShoppingCartProduct({product, remove}) {
         <ProductContainer>
                 <ItemInfo>
                     <Image>
-                        <div style={{marginRight: "5px"}}>
+                        {/* <div style={{marginRight: "5px"}}>
                             <CustomizedCheckbox />
-                        </div>
+                        </div> */}
                         <Link to="/" >
                             <img src={product.image} alt={product.title} />
                         </Link>
@@ -131,12 +131,12 @@ function ShoppingCartProduct({product, remove}) {
                         <Detail>
                             <LinkStyle  style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{product.title}</LinkStyle>
                         </Detail>
-                        <Detail>In Stock</Detail>
-                        <Detail style={{display: "flex", margin: "8px 0"}}>
+                        <Detail style={{margin: '10px 0'}}>In Stock</Detail>
+                        {/* <Detail style={{display: "flex", margin: "8px 0"}}>
                             <CustomizedCheckbox />
                             <div style={{marginLeft: "5px"}}>This is a gift</div>
                             <LinkStyle  style={{marginLeft: "4px"}}>Learn more</LinkStyle>
-                        </Detail>
+                        </Detail> */}
                     </Details>
                     <Manipulations>
                         <DropdownQuantity 
@@ -151,10 +151,10 @@ function ShoppingCartProduct({product, remove}) {
                         <Manipulation>
                             <LinkStyle>Save for later</LinkStyle>
                         </Manipulation>
-                        <Divider />
+                        {/* <Divider />
                         <Manipulation>
                             <LinkStyle>Compare with similar items</LinkStyle>
-                        </Manipulation>
+                        </Manipulation> */}
                     </Manipulations>
                 </ItemInfo>
                 <ItemPrice>${product.price}</ItemPrice>

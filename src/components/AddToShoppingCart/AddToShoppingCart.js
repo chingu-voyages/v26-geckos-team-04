@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShopIcon from '@material-ui/icons/Shop';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -48,6 +49,7 @@ const AddToShoppingCartStyles = styled.div`
        align-items: center;
        justify-content: center;
        min-height: 36px;
+       width: 100%;
 
        :hover {
            cursor: pointer;
@@ -64,7 +66,12 @@ const AddToShoppingCartStyles = styled.div`
        .text {
            flex: 1;
        }
-   }
+    }
+    .buy-link {
+        text-decoration: none;
+        color: #000;
+        width: 100%;
+    }
 
    .cart-button {
         background-color: var(--orange-1);
@@ -114,7 +121,11 @@ export default function AddToShoppingCart({ product }) {
             <button className="cart-button" onClick={addProductToCart}>
                 <AddShoppingCartIcon className="icon"/><span className="text">Add to Cart</span>
             </button>
-            <button className="buy-button"><ShopIcon className="icon"/><span className="text">Buy Now</span></button>
+            <Link to="/checkout" className='buy-link'>
+            <button className="buy-button" onClick={addProductToCart}>
+                    <ShopIcon className="icon"/><span className="text">Buy Now</span>
+            </button>
+            </Link>
             <div className="secure-details"><LockIcon fontSize="small" className="icon"/><span>Secure transaction</span></div>
             <div>
                 <div>Ships from: Amazon US</div>
