@@ -52,7 +52,6 @@ function Wishlist() {
             </Top>
             {
                 wishlist?.map((product, i) => {
-                    console.log(product)
                     return (
                         <ProductContainer key={i}>
                             <WishlistProduct 

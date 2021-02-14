@@ -110,7 +110,6 @@ export default function AddToShoppingCart({ product }) {
             type: 'ADD_TO_WISHLIST',
             item: product
         })
-        console.log(basket)
     }
 
     return (

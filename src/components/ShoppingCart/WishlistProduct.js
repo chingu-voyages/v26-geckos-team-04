@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 // import CustomizedCheckbox from '../common/CustomizedCheckbox';
-import DropdownQuantity from '../common/DropdownQuantity';
 import { Link } from "react-router-dom";
 
 const ProductContainer = styled.div`
