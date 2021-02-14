@@ -58,7 +58,7 @@ const Subtotal = styled.div`
 function ShoppingCartList({products}) {
     const windowWidth = useWindowWidthState();
     // eslint-disable-next-line no-unused-vars
-    const [_, dispatch] = useStateValue();
+    const [{basket, wishlist}, dispatch] = useStateValue();
     const subtotal = useBasketTotal();
     const numOfItems = useNumOfItems();
     const itemsText = numOfItems === 1 ? 'item' : 'items'
@@ -69,6 +69,24 @@ function ShoppingCartList({products}) {
             id: id,
         })
     }
+    // const removeFromWishlist = (id) => {
+    //     dispatch({
+    //         type: 'REMOVE_FROM_WISHLIST',
+    //         id: id,
+    //     })
+    // }
+    // const addToWishlist = (id) => {
+    //     dispatch({
+    //         type: 'ADD_TO_WISHLIST',
+    //         id: id,
+    //     })
+    // }
+    const moveToWishlist = (id) => {
+        dispatch({
+            type: 'MOVE_TO_WISHLIST',
+            id: id,
+        })
+    }
     const setQuantity = (id, n) => {
         dispatch({
             type: 'SET_QUANTITY',
@@ -76,6 +94,18 @@ function ShoppingCartList({products}) {
             quantity: n
         })
     }
+    // const setWishlistQuantity = (id, n) => {
+    //     dispatch({
+    //         type: 'SET_WISHLIST_QUANTITY',
+    //         id: id,
+    //         quantity: n
+    //     })
+    // }
+    // const MoveToWishlist = (id) => {
+    //     removeFromBasket(id);
+    //     setWishlistQuantity(id, 1);
+    //     addToWishlist(id);
+    // }
     return (
         <Cart>
             { windowWidth > 579 ? (
@@ -92,6 +122,7 @@ function ShoppingCartList({products}) {
                             <ShoppingCartProduct 
                                 product={product}
                                 remove={() => removeFromBasket(product.id)}
+                                save={() => moveToWishlist(product.id)}
                             />
                         </ProductContainer>
                     )
@@ -103,6 +134,7 @@ function ShoppingCartList({products}) {
                             <ShoppingCartProductSp 
                                 product={product}
                                 remove={() => removeFromBasket(product.id)}
+                                save={() => moveToWishlist(product.id)}
                                 setQuantity={setQuantity} 
                             />
                         </ProductContainer>

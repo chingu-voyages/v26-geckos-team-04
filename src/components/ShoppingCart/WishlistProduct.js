@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const ProductContainer = styled.div`
     width: 100%;
     height: auto;
-    min-width: 642px;
     min-height: 180px;
     margin: 12px 0;
     &:after {
@@ -40,7 +39,7 @@ const ItemPrice= styled.div`
     line-height: 2;
 `;
 const Details = styled.ul`
-     padding-left: 220px;
+    padding-left: 220px;
     width: 100%;
     list-style: none; 
     padding: 0; 
@@ -52,10 +51,25 @@ const Details = styled.ul`
 `;
 const Detail = styled.li`
     width: 100%;
-    font-size: 12px;
     margin: 2px 0;
+    line-height: 1.6; 
+    fontWeight: 600;
+    color: var(--dark-green);
+    &:nth-child(1) {
+        font-size: 18px;
+        &:hover {
+            color: var(--red);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 579px) {
+            color: #000;
+            font-size: 14px;
+        }
+    }
     &:nth-child(2) {
         color: var(--green);
+        margin: '10px 0'
     }
 `;
 const Image = styled.div`
@@ -126,22 +140,18 @@ function ShoppingCartProduct({product, remove, save}) {
                     </Image>
                     <Details>
                         <Detail>
-                            <LinkStyle  style={{lineHeight: "1.6", fontWeight: "600", fontSize: "18px"}}>{product?.title}</LinkStyle>
+                            <div>{product?.title}</div>
                         </Detail>
-                        <Detail style={{margin: '10px 0'}}>In Stock</Detail>
+                        <Detail>In Stock</Detail>
                     </Details>
                     <Manipulations>
-                        <DropdownQuantity 
-                            product={product}
-                            zeroOption={true}
-                        />
                         <Divider />
                         <Manipulation>
                             <LinkStyle onClick={remove}>Delete</LinkStyle>
                         </Manipulation>
                         <Divider />
                         <Manipulation>
-                            <LinkStyle onClick={save}>Move to Wishlist</LinkStyle>
+                            <LinkStyle onClick={save}>Move to Basket</LinkStyle>
                         </Manipulation>
                     </Manipulations>
                 </ItemInfo>

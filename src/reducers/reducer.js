@@ -1,5 +1,6 @@
 export const initialState = {
     basket: [],
+    wishlist: [],
     user: null,
 };
 
@@ -57,6 +58,38 @@ const reducer = (state, action) => {
                 ...state,
                 basket: newBasket
             }
+        case 'ADD_TO_WISHLIST':
+            let isSameInWishlist = false;
+            state.wishlist.forEach(product => {
+                if (product.id === action.item.id) {
+                    isSameInWishlist = true;
+                }
+            })
+            if (isSameInWishlist) {
+                return { 
+                    ...state
+                };
+            }
+            return {
+                ...state,
+                wishlist: [...state.wishlist, action.item]
+            };
+        case 'REMOVE_FROM_WISHLIST':
+            const indexOfWishlist = state.basket.findIndex(
+                (basketItem) => basketItem.id === action.id
+            );
+            let newWishlist = [...state.wishlist];
+                newWishlist.splice(indexOfWishlist, 1);
+            if (indexOfWishlist >= 0) {
+
+            } else {
+                console.warn(`Cant remove product (id: ${action.id}) as it is not in the basket!`);
+            }
+
+            return {
+                ...state,
+                wishlist: newWishlist
+            }
         case "SET_USER":
             return {
                 ...state,
@@ -68,6 +101,26 @@ const reducer = (state, action) => {
                 basket: state.basket.map(product => 
                             product.id === action.id ? { ...product, quantity: action.quantity } : product
                         )
+            }
+        case "MOVE_TO_WISHLIST":
+            const moveToWishlistItem = state.basket.filter(product => product.id === action.id)[0]
+            return {
+                ...state,
+                basket: state.basket.filter(product => product.id !== action.id),
+                wishlist: [ 
+                    ...state.wishlist, 
+                    moveToWishlistItem
+                ]
+            }
+        case "MOVE_TO_BASKET":
+            const moveToBasketItem = state.wishlist.filter(product => product.id === action.id)[0]
+            return {
+                ...state,
+                wishlist: state.wishlist.filter(product => product.id !== action.id),
+                basket: [ 
+                    ...state.basket, 
+                    moveToBasketItem
+                ]
             }
         case "EMPTY_BASKET":
             return {

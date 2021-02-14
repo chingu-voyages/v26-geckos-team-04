@@ -97,13 +97,20 @@ const AddToShoppingCartStyles = styled.div`
 
 export default function AddToShoppingCart({ product }) {
     // eslint-disable-next-line no-unused-vars
-    const [_, dispatch] = useStateValue();
+    const [{basket}, dispatch] = useStateValue();
 
     function addProductToCart() {
         dispatch({
             type: 'ADD_TO_BASKET',
             item: product
         })
+    }
+    function addProductToWishlist() {
+        dispatch({
+            type: 'ADD_TO_WISHLIST',
+            item: product
+        })
+        console.log(basket)
     }
 
     return (
@@ -132,7 +139,7 @@ export default function AddToShoppingCart({ product }) {
                 <div>Sold by: Amazon US</div>
             </div>
             <div className="deliver-details"><LocationOnIcon fontSize="small" className="icon"/><span>Deliver to North Epping 2121</span></div>
-            <button>Add to Wish List</button>
+            <button onClick={addProductToWishlist}>Add to Wish List</button>
         </AddToShoppingCartStyles>
     )
 }

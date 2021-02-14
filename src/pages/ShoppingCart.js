@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ShoppingCartList from '../components/ShoppingCart/ShoppingCartList';
 import ProceedToCheckout from '../components/ShoppingCart/ProceedToCheckout';
+import Wishlist from '../components/ShoppingCart/Wishlist';
 import { useStateValue } from '../contexts/StateProvider';
 
 const ShoppingCartPage = styled.section`
@@ -58,15 +59,12 @@ const Empty = styled.div`
         padding: 0;
         font-size: 14px;
     }
-`;
-const Spacer = styled.div`
-    height: 300px;
-    width: 100%;
+    min-height: 300px;
 `;
 
 function ShoppingCart() {
     // eslint-disable-next-line no-unused-vars
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, wishlist }, dispatch] = useStateValue();
     return (
         <ShoppingCartPage>
             <Container>
@@ -77,11 +75,13 @@ function ShoppingCart() {
                             <h2>Your Amazon Cart is empty.</h2>
                             <p>Check your Saved for later items below or <Link to='/' style={{textDecoration: 'none', color: '#007185'}}>continue shopping</Link>.</p>
                         </Empty>
-                        <Spacer />
                         </>
                     ) : (
                         <ShoppingCartList products={basket} />
                     )}
+                    {wishlist.length > 0 ? (
+                        <Wishlist />
+                    ) : ('')}
                 </Main>
                 <Aside>
                     {basket.length > 0 ? (
